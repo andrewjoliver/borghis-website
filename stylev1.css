@@ -1,13 +1,15 @@
 body{
     font-family: 'Karla', sans-serif;
 }
-body, html {
-    height: 100%;
+#header{
+    height: 100vh;
 }
 h1{
     color: white;
 }
-
+hr{
+    margin-bottom: 5%;
+}
 
 /* HEADER AND NAV BAR STYLING */
 .bg { 
@@ -118,9 +120,6 @@ h1{
 
 
 /* STLYLING FOR PICTURES OF FOOD AND MENUS */
-#menus{
-    height: 100vh;
-}
 #foodMenuIcons, #menuIcons{
     margin-top: 3%;
 }
@@ -201,9 +200,6 @@ h1{
 
 
 /* STYLING OF REVIEWS */
-#reviews{
-    height: 100vh;
-}
 #cf, #cf1, #cf2, #cf3, #cf4, #cf5 {
   position:relative;
   height:25vh;
@@ -265,9 +261,8 @@ h1{
 #cf5 img.top{
     animation-duration: 9s;
 } 
-#reviews .col-sm-6, #reviews .col-12{
+#reviews .col-sm-6, #reviews .col-10{
     margin: 1%;
-    height: 50%;
     border: 1px solid black;
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5), 0 10px 30px 0 rgba(0, 0, 0, 0.4);
     border-radius: 15px;
@@ -285,9 +280,6 @@ h1{
 
 
 /* STYLING OF RESERVATION INPUT */
-#reservationSelectionContainer{
-    height: 100vh;
-}
 #reservationSelectionContainer .col, #reservationSelectionContainer .col-3, #reservationSelectionContainer .col-4, #reservationSelectionContainer .col-7, #reservationSelectionContainer .col-2{
     height: 10vh;
 }
@@ -411,7 +403,6 @@ h1{
 
 /* FAQ Styling */
 #faqs{
-    height: 100vh;
     text-align: center;
 }
 #question{
@@ -442,7 +433,6 @@ h1{
 
 /*STORY STYLING*/
 #story{
-    height: 100vh;
     text-align: center;
 }
 #story img, .mobileLayout img{
@@ -466,7 +456,6 @@ h1{
 /*LOCATION AND CONTACT STYLE*/
 #location{
     text-align: center;
-    height: 100vh;
 }
 #location img{
     padding: 5%;
@@ -518,15 +507,38 @@ h1{
     padding-left: 3%;
 }
 #emailAcct a h2{
-    font-size: 175%; 
+    font-size: 100%; 
 }
 
 
 
 /*RESIZING FOR MEDIUM SCREENS*/
+@media (max-width: 1020px){
+    #reviews .col-sm-1{
+        display: none;
+    }
+    #reviews .row{
+        margin-left: 10%;
+    }
+    #reviews .col-sm-6, #reviews .col-10{
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 15px 0 rgba(0, 0, 0, 0.4);
+    }
+    #reservationSelectionContainer p,  #reservationSelectionContainer input{
+        font-size: 90%;
+    }
+    #faqs p{
+        font-size: 85%;
+    }
+}
 @media (max-width: 850px){
     .bg .container-fluid #navbar a{
         font-size: 90%;
+    }
+    #webLayout {
+        display: none;
+    }
+    .mobileLayout{
+        display: inline-block;
     }
 }
 @media (max-width: 767px){
@@ -579,19 +591,14 @@ h1{
         margin-left: 96%;
         width: 3%;
     }
-    #cf, #cf1, #cf2, #cf3 {
-        height: 18vh;
+    #reviews .row div div {
         margin: 2%;
     }
-    #reviews .container .row img{
-        width: 200%;
-    }
-    #reviews{
-        height: 175vh;
+    #reviews img{
+        margin-top: 15%;
     }
     #reviews .col-12{
         box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 15px 0 rgba(0, 0, 0, 0.4);
-        margin: 2%;
     }
     #reviews .container .row{
         margin-bottom: 5%;
@@ -599,31 +606,17 @@ h1{
     #reservationSelectionContainer h1{
         display: none;
     }
-    #reservationSelectionContainer p{
+    #reservationSelectionContainer p,  #reservationSelectionContainer input{
         font-size: 90%;
     }
     #reservationSelectionContainer .row{
         margin-top: 3.5%;
     }
-    #webLayout {
-        display: none;
-    }
-    #story{
-        height: 190vh;
-    } 
-    .mobileLayout{
-        display: inline-block;
-    }
     .vl{
         display: none;
     }
-    #faqs{
-        height: 180vh;
-    }   
     #faqs .row{
-        margin-top: 2%;
-        border: none;
-        box-shadow: none;
+        margin: 2%;
     }
     #faqs img{
         margin-top: 40%;
