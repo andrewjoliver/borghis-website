@@ -33,45 +33,37 @@ function navbarColor(num){
     for (var x = 0; x < $('#header .col-md').length; x++){
         $('#header .col-md')[x].style.backgroundColor = "gray";
     }
-    $('#header .col-md:nth-child(' + num +')')[0].style.backgroundColor = "#7bc7dd";
+    
+    $('#header .col-md:nth-child(' + (parseInt(num)+1).toString() +')')[0].style.backgroundColor = "#7bc7dd";
+    
     var menuLocation = ["Home", "Menus", "Reviews", "Reservations", "Our Story", "FAQs", "Contact"];
-    console.log(menuLocation[num]);
-    $("#hamburgerLocation").replaceWith("<p id='hamburgerLocation'>" + menuLocation[num-1] + "</p>");
+    
+    $("#hamburgerLocation").replaceWith("<p id='hamburgerLocation'>" + menuLocation[num] + "</p>");
 }
 window.onscroll = function() {myFunction()};
 function myFunction(num) {
     var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     var scrolled = (winScroll / height) * 100;
-
-    if (scrolled < 14.2857){
-        document.getElementById("myBar").style.width = 2 * 14.285714/4 + "%";
-        navbarColor(1);
+    
+    var mobileHeights = [10.814497272018706, 15.281567849168939, 42.88776305533905, 53.85814497272019, 73.460639127046, 96.35326221781196];
+    var regularHeights = [14.2857, 28.5714, 42.8571, 57.1428, 71.4285, 85.7142, 100]
+    
+    var scrolledHeight = regularHeights;
+    var value = 1;
+    var x = 0;
+    
+    if($(window).width() < 800){
+        scrolledHeight = mobileHeights
     }
-    else if (scrolled < 2*14.2857){
-        document.getElementById("myBar").style.width = 3*28.571429/4 + "%";
-        navbarColor(2);
+    while (scrolled > scrolledHeight[x]){
+        value += 2;
+        x++
     }
-    else if (scrolled < 3*14.2857){
-        document.getElementById("myBar").style.width = 5*28.571429/4 + "%";
-        navbarColor(3);
-    }
-    else if (scrolled < 4*14.2857){
-        document.getElementById("myBar").style.width = 7*28.571429/4 + "%";
-        navbarColor(4);
-    }
-    else if (scrolled < 5*14.2857){
-        document.getElementById("myBar").style.width = 9*28.571429/4 + "%";
-        navbarColor(5);
-    }
-    else if (scrolled < 6*14.2857){
-        document.getElementById("myBar").style.width = 11*28.571429/4 + "%";
-        navbarColor(6);
-    }
-    else{
-        document.getElementById("myBar").style.width = 13*28.571429/4 + "%";
-        navbarColor(7);
-    }
+    console.log(value + "  " + x);
+    document.getElementById("myBar").style.width = (value) * 28.571429/4 + "%";
+    navbarColor(x);
+    
     if ($(window).width() < 768){
         $('#hamburgerContainer')[0].style.visibility = "visible";
         $(".bg .container-fluid #navbar")[0].style.visibility = "hidden";

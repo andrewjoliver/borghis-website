@@ -555,6 +555,7 @@ hr{
     }
 }
 
+/*STYLING FOR MOBILE*/
 @media (max-width: 600px){
     #foodMenuIcons{
         display: inline;
@@ -618,16 +619,26 @@ hr{
     #faqs .row{
         margin: 2%;
     }
+    #faqs p{
+        margin: 5%;
+    }
     #faqs img{
         margin-top: 40%;
     }
     #emailAcct a h2{
+        margin-top: 8%;
         font-size: 100%;
+    }
+    #emailAcct{
+        height: 8vh;
     }
     #map {
         height: 230%;
     }
     #infoBottom{
         margin-top: 75%;
+    }
+    hr{
+        margin-bottom: 15%;
     }
 }
