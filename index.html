@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<!--Andrew Oliver ajo14-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="ResEasy">
+    
+    <!-- Vue, Firebase, VueFire, and Jquery added to page -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuefire/1.4.5/vuefire.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <!-- https://github.com/charliekassel/vuejs-datepicker -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vuejs-datepicker"></script>
+    
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    
+    <!-- Firebase Authentication -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+    
+    <!-- D3JS -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+    
+    <!-- GMail API -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+    
+    <!-- javascript and css styling for this page -->
+    <link rel="stylesheet" href="stylev1.css">
+    <script src="script.js" async></script>
+    
+    <!-- Maps API Integration -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9cuji8RuNPBY0160-0JGMDqIZJkPavf4&callback=initMap">
+    </script>
+ 
+    <title>Borghi's By The Bay</title>
+</head>
+
+<body>
+    
+    <div class="bg" id="header">
+        <p id="homeJump"></p>
+        <div class="container-fluid">
+            <div id="navbar" class="row">
+                <div id="home" class="col-md">
+                    <a href="#homeJump">Home</a>
+                </div>
+                <div class="col-md">
+                    <a href="#menusJump">Menus</a>
+                </div>
+                <div class="col-md">
+                    <a href="#reviewsJump">Reviews</a>
+                </div>
+                <div class="col-md">
+                    <a href="#reservationsJump">Reservations</a>
+                </div>
+                <div class="col-md">
+                    <a href="#storyJump">Our Story</a>
+                </div>
+                <div class="col-md">
+                    <a href="#faqJump">FAQs</a>
+                </div>
+                <div class="col-md">
+                    <a href="#locationJump">Contact</a>
+                </div>
+            </div>
+            <div clas="row">
+                <div class="progress-container">
+                    <div class="progress-bar" id="myBar"></div>
+                </div> 
+            </div>
+        </div>
+        
+        <div id="hamburgerContainer">
+            <div id="textLocationContainer">
+                <p id="hamburgerLocation">Home</p>
+            </div>
+            <img id="hamburger" onclick="showDropDownMenu()" src="photos/hamburger-icon.png">
+        </div>
+        
+        <img id="name" src="photos/logos.png">
+        <div id="address">
+            <p id="addressListed"><i>8128 Third Avenue Stone Harbor, NJ</i></p>
+            <p id="phoneNumberListed"><i>(609) 961-3899</i></p>
+        </div>
+        
+    </div>
+    
+    <div id="menu-background">
+        <img onclick="exitMenu()" src="photos/black-background.jpg">
+    </div>
+    
+    <div id="menus">
+        
+        <div id="full-breakfast-menu">
+            <img src="photos/full-breakfast-menu.jpg">
+        </div>
+        <div id="full-dinner-menu">
+            <img src="photos/full-dinner-menu.jpg">
+        </div>
+        
+        <div id="exit">
+            <img onclick="exitMenu()" src="photos/exit-logo.png">
+        </div>
+        
+        <a id="menusJump">
+            <h1>Home</h1>
+        </a>
+        
+        
+        <div id="foodMenuIcons">
+            <div id="foodPhotos">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <img src="photos/bruschetta.png">
+                        </div>
+                        <div class="col">
+                            <img src="photos/coco-shrimp.png">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <img src="photos/salmon.png">
+                        </div>
+                        <div class="col">
+                            <img src="photos/waffle.png">
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            
+            <div id="menuIcons">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <img onclick="showBreakfast()" src="photos/breakfast-menu-icon.png">
+                        </div>
+                        <div class="col">
+                            <img onclick="showDinner()" src="photos/dinner-menu-icon.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <div id="reviews">
+        
+        <a id="reviewsJump">
+            <h1>Reviews</h1>
+        </a>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 col-12 col-centered">
+                    <div id="cf">
+                        <img class="bottom" src="reviews/review5.png" />
+                        <img class="top" src="reviews/review6.png" />
+                    </div>
+                </div>
+                <div class="col-sm-1 col-centered"></div>
+                <div class="col-sm-5 col-12 col-centered">
+                    <div id="cf1">
+                        <img class="bottom" src="reviews/review3.png" />
+                        <img class="top" src="reviews/review4.jpg" /> 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5 col-12 col-centered">
+                    <div id="cf2">
+                        <img class="bottom" src="reviews/review3.png" />
+                        <img class="top" src="reviews/review4.jpg" /> 
+                    </div>
+                </div>
+                <div class="col-sm-1 col-centered">
+                </div>
+                <div class="col-sm-5 col-12 col-centered">
+                    <div id="cf3">
+                        <img class="bottom" src="reviews/review7.png" />
+                        <img class="top" src="reviews/review8.png" />
+                    </div>
+                </div>            
+            </div>
+            <div class="row">
+                <div class="col-sm-5 col-12 col-centered">
+                    <div id="cf4">
+                        <img class="bottom" src="reviews/review2.jpg" />
+                        <img class="top" src="reviews/review1.jpg" />
+                    </div>
+                </div>
+                <div class="col-sm-1 col-centered">
+                </div>
+                <div class="col-sm-5 col-12 col-centered">
+                    <div id="cf5">
+                        <img class="top" src="reviews/review5.png" />
+                        <img class="bottom" src="reviews/review6.png" />
+                    </div>
+                </div>            
+            </div>
+        </div>
+        
+    </div>
+    
+    <a id="reservationsJump"><hr></a>
+    
+    <div id="reservationSelectionContainer">
+        <div class="container">
+    
+                <div class="row">
+                    <div class="col col">
+                        <input id="firstname" placeholder="First Name" type="text" v-model="firstname">
+                    </div>
+                    <div class="col">
+                        <input id="lastname" placeholder="Last Name" type="text" v-model="lastname">
+                    </div>
+                    <div class="col">
+                        <input id="size" placeholder="Party Size" type="text" v-model="size">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <p id="inside" @click="selectSeat('inside', 'Inside')">Seated Inside</p>
+                    </div>
+                    <div class="col">
+                        <p id="outside" @click="selectSeat('outside', 'Outside')">Seated Outside</p>
+                    </div>
+                    <div class="col">
+                        <p id="nopref" @click="selectSeat('nopref', 'No Preference')">No Seating Preference</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="datePickerContainer" class="col-12 col-sm-6 col">
+                        <vuejs-datepicker @closed="closedDateSelection()" id="datePicker" placeholder="Select Date" v-model="date"></vuejs-datepicker>  
+                    </div>
+                    <div class="col-12 col-sm-6 col">
+                        <div id="timeSelection" class="container">
+                            <div class="row">
+                                <div id="time500" class="col">
+                                    <p >5:00</p>
+                                </div>
+                                <div id="time530" class="col">
+                                    <p>5:30</p>
+                                </div>
+                                <div id="time600" class="col">
+                                    <p>6:00</p>
+                                </div>
+                                <div id="time630" class="col">
+                                    <p>6:30</p>
+                                </div>
+                                <div id="time730" class="col">
+                                    <p>7:30</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="time800" class="col">
+                                    <p>8:00</p>
+                                </div>
+                                <div id="time830" class="col">
+                                    <p>8:30</p>
+                                </div>
+                                <div id="time900" class="col">
+                                    <p>9:00</p>
+                                </div>
+                                <div id="time930" class="col">
+                                    <p>9:30</p>
+                                </div>
+                                <div id="time1000" class="col">
+                                    <p>10:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <input id="email" placeholder="Email" type="text" v-model="email">
+                    </div>
+                    <div class="col">
+                        <input id="phone" placeholder="Phone Number" type="text" v-model="phone">
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <p id="highchair" @click="selectAcc('highchair', 'Highchair')">High Chair Required</p>
+                  </div>
+                  <div class="col">
+                    <p id="ada" @click="selectAcc('ada', 'ADA Access')">ADA Access Required</p>
+                  </div>
+                  <div class="col">
+                    <input id="other" @click="selectAcc('other', '')" placeholder="Other" type="text" v-model="other">
+                  </div>
+                </div>
+                
+                <hr>
+                
+                <div class="row">
+                    <!--
+                    <div id="confirm" class="col">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col h-25">
+                                    <h6>{{firstname}} {{lastname}}</h6>
+                                </div>
+                                <div class="col-auto h-25">
+                                    <h6>{{seating}}</h6>
+                                </div>
+                                <div class="col-auto h-25">
+                                    <h6>{{datePrint}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-auto h-25">
+                                    <h6>{{phonePrint}}</h6>
+                                </div>
+                                <div class="col-auto h-25">
+                                    <h6>{{accommodationsPrint}} {{other}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col h-25">
+                                    <h6>{{time}}</h6>
+                                </div>
+                                <div class="col h-25">
+                                    <h6> {{size}}</h6>
+                                </div>
+                                <div class="col h-25">
+                                    <h6> {{email}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                    <div class="col-4"></div>
+                    <div class="col-4 align-self-center">
+                        <input type="submit" value="Submit" @click="checkForm()">  
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+
+
+        </div>
+    </div>
+    
+    <hr>
+    
+    <div id="story">
+        <a id="storyJump">
+            <h1><b>Dino Borghi</b></h1>
+        </a>
+        <div id="webLayout" class="container">
+            <div class="row">
+                <div class="col-3">
+                    <a target=”_blank” href="https://view.publitas.com/14613/613434/pages/d3e9bdc6b7b3e6747d597d029eb97f7f7150fd87-at600.jpg"><img src="photos/sevenmiletimes-1.jpg"></a>
+                </div>
+                <div class="col-6">
+                    <h2><b>Dino Borghi</b></h2>
+                    <h5><b>Owner/Chef of Borghi’s Restaurant (Chalfont, PA) and Borghi’s By the Bay (Stone Harbor, NJ)</b></h5>
+                    <p>Dino Borghi has always loved the shore. From the time he was a teenager, he spent his summers at the beach, working as a chef at a popular restaurant in Wildwood Crest. In the back of his mind, he always dreamed of someday owning his own restaurant at the Jersey Shore.</p>
+                    <p>When Borghi’s Restaurant in Chalfont, PA, opened its doors in 2002, Dino stopped spending his summers in Wildwood and dedicated his time and energy to his budding business. Borghi’s is home to some of the finest cuisine in Bucks County – and with its classic atmosphere and top-notch service, everyone who steps into the building immediate feels like they’re part of the family.</p>
+                    <p>However, Dino’s dream of owning a restaurant down the shore has never left him. After several years of searching, his dream became a reality! Borghi’s By the Bay, located in Stone Harbor, NJ, opened in the summer of 2015 serving breakfast and dinner menus 7 days a week. Dino and his staff look forward to serving you!</p>
+                </div>
+                <div class="col-3">
+                    <a target=”_blank” href="https://view.publitas.com/14613/613434/pages/262a99786a18b78997bff49ac5e659f934d760cd-at600.jpg"><img src="photos/sevenmiletimes-2.jpg"></a>
+                </div>
+            </div>
+        </div>
+        <div class="mobileLayout">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h2><b>Dino Borghi</b></h2>
+                        <h5><b>Owner/Chef of Borghi’s Restaurant (Chalfont, PA) and Borghi’s By the Bay (Stone Harbor, NJ)</b></h5>
+                        <p>Dino Borghi has always loved the shore. From the time he was a teenager, he spent his summers at the beach, working as a chef at a popular restaurant in Wildwood Crest. In the back of his mind, he always dreamed of someday owning his own restaurant at the Jersey Shore.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a target=”_blank” href="https://view.publitas.com/14613/613434/pages/d3e9bdc6b7b3e6747d597d029eb97f7f7150fd87-at600.jpg"><img src="photos/sevenmiletimes-1.jpg"></a>
+                    </div>
+                    <div class="col">
+                        <a target=”_blank” href="https://view.publitas.com/14613/613434/pages/262a99786a18b78997bff49ac5e659f934d760cd-at600.jpg"><img src="photos/sevenmiletimes-2.jpg"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>When Borghi’s Restaurant in Chalfont, PA, opened its doors in 2002, Dino stopped spending his summers in Wildwood and dedicated his time and energy to his budding business. Borghi’s is home to some of the finest cuisine in Bucks County – and with its classic atmosphere and top-notch service, everyone who steps into the building immediate feels like they’re part of the family.</p>
+                        <p>However, Dino’s dream of owning a restaurant down the shore has never left him. After several years of searching, his dream became a reality! Borghi’s By the Bay, located in Stone Harbor, NJ, opened in the summer of 2015 serving breakfast and dinner menus 7 days a week. Dino and his staff look forward to serving you!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    <a id="faqJump"><hr> </a>
+    
+    <div id="faqs">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-8">
+                    <p id="question"><b><b>Are you a BYOB?</b></b></p>
+                    <p id="answer">Yes, we are a BYOB! We can provide wine glasses, beer glasses and rocks glasses as well as sodas, lemons and limes.</p>
+                </div>
+                <div class="col-sm-2 col-4" id="outlineHelper">
+                    <img src="icons/byob.png">
+                    <div class="vl"></div>
+                </div>
+                <div class="col-sm-4 col-8">
+                    <p id="question"><b>Where are you located?</b></p>
+                    <p id="answer">We are on the corner of Third Avenue and 82nd Street in Stone Harbor, NJ. Our full address and location can be seen under our "Location and Contact" page.</p>
+                </div>
+                <div class="col-sm-2 col-4" id="outlineHelper">
+                    <img src="icons/location.png">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-4  col-8">
+                    <p id="question"><b>Do you have highchairs?</b></p>
+                    <p id="answer">Yes, we do! We have highchairs and are happy to provide any party with highchairs upon request.</p>
+                </div>
+                <div class="col-sm-2 col-4"  id="outlineHelper">
+                    <img src="icons/highchair.png">
+                    <div class="vl"></div>
+                </div>
+                <div class="col-sm-4  col-8">
+                    <p id="question"><b>Do you accept credit cards?</b></p>
+                    <p id="answer">Yes, we do! We accept Visa, MasterCard, American Express and Discover. We also accept cash payments and Borghi's gift cards.</p>
+                </div>
+                <div class="col-sm-2 col-4" id="outlineHelper">
+                    <img src="icons/credit-card.png">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-8">
+                    <p id="question"><b>Is your restaurant ADA accessible?</b></p>
+                    <p id="answer">Yes, it is. We have wheelchair accessible ramp, along with ADA accessible seating and restrooms. Give us a call and we'll accomodate any accessibility concerns.</p>
+                </div>
+                <div id="long" class="col-sm-2 col-4">
+                    <img src="icons/ada.png">
+                    <div class="vl"></div>
+                </div>
+
+                <div class="col-sm-4 col-8">
+                    <p id="question"><b>Do you have options for those with dietary restrictions?</b></p>
+                    <p id="answer">Yes, we have gluten-free, vegan and vegetarian options. We can accomodate most, if not all, dietary restrictions.</p>
+                </div>
+                <div id="long" class="col-sm-2 col-4">
+                    <img src="icons/restrictions.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a id="locationJump"><hr></a>
+        
+    <div id="location">
+        <div class="container" >
+            <div class="row">
+                <div id="infoContainerclass" class="col-md-6 col-12" >
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>8128 Third Avenue <br> Stone Harbor, NJ </h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="photos/phone.png">
+                        </div>
+                        <div class="col-10">
+                            <h2>609-961-3899</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="photos/mail.png">
+                        </div>
+                        <div id="emailAcct" class="col-10">
+                            <a href="mailto:borghisbythebay@gmail.com"><h2>borghisbythebay@gmail.com</h2></a>
+                        </div>
+                    </div>
+                    <div id="socialMedia" class="row">
+                        <div class="col" id="fb">
+                            <a target='_blank' href=" https://www.facebook.com/borghisbythebay/"><img src="photos/fb.png"></a>
+                        </div>
+                        <div class="col" id="ig">
+                            <a target='_blank' href="https://www.instagram.com/borghisbythebay/"><img src="photos/ig.png"></a>
+                        </div>
+                    </div>
+                </div>
+                <div id="mapContainer" class="col-md-6 col-12">
+                    <div id="map"></div>
+                    <a target="_blank" href="https://www.google.com/maps/dir//8128+3rd+Ave,+Stone+Harbor,+NJ+08247/@39.0634628,-74.7530005,17z/data=!4m13!1m4!3m3!1s0x89c0a5dcf23fee83:0xdd7ada7b47e1c956!2s8128+3rd+Ave,+Stone+Harbor,+NJ+08247!3b1!4m7!1m0!1m5!1m1!1s0x89c0a5dcf23fee83:0xdd7ada7b47e1c956!2m2!1d-74.7530005!2d39.0634628"><p><span>Directions</span></p></a>
+                </div>
+            </div>
+            <div id="infoBottom" class="row">
+                <div class="col">
+                    <h5>Borghi's Restaurant By the Bay, 2018. All Rights Reserved.</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>Web Design by ResEasy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+           
+
+</body>
+</html>

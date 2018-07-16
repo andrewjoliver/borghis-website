@@ -1,0 +1,640 @@
+body{
+    font-family: 'Karla', sans-serif;
+}
+body, html {
+    height: 100%;
+}
+h1{
+    color: white;
+}
+
+
+/* HEADER AND NAV BAR STYLING */
+.bg { 
+    background-image: url("photos/sunset.jpg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#navbar, #hamburger-menu{
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+#header{
+    text-align: center;
+}
+#name{
+    margin-top: 25vh;
+    width: 50%;
+}
+#header .row{
+    display: flex;
+}
+#header a{
+    color: white;
+    font-size: 120%
+}
+#header p{
+    color: white;
+    font-size: 130% 
+}
+#addressListed{
+    margin-top: 1%;
+    margin-bottom: 0;
+}
+#header a:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
+#header .col-md{
+    background-color: gray;
+}
+#header .col-md:hover{
+    background-color: #7bc7dd;
+}
+#header .col-md a:hover{
+    cursor: pointer;
+}
+#header .row{
+    height: 30px;
+}
+
+/*HAMBURGER STYLING*/
+#hamburgerContainer{
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5%;
+    z-index: 5;
+    background-color: gray;
+}
+#hamburger{
+    position: absolute;
+    right: 0;
+    height: 100%;
+}
+#hamburger:hover{
+    cursor: pointer;
+}
+#textLocationContainer{
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    top: 0;
+}
+/*PROGRESS BAR STYLING*/
+.progress-container {
+  z-index: 5;
+  width: 100%;
+  background: #ccc;
+  position: fixed;
+  left: 0;
+  top: 30px;
+  visibility: visible;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #7bc7dd;
+  width: 0%;
+}
+
+.content {
+  padding: 100px 0;
+  margin: 50px auto 0 auto;
+  width: 80%;
+}
+
+
+
+
+
+
+
+
+/* STLYLING FOR PICTURES OF FOOD AND MENUS */
+#menus{
+    height: 100vh;
+}
+#foodMenuIcons, #menuIcons{
+    margin-top: 3%;
+}
+#foodMenuIcons{
+    display: flex;
+}
+#foodPhotos img{
+    max-width: 90%;
+}
+#foodPhotos{
+    width: 50%;
+    text-align: center;
+}
+#menuIcons{
+    width: 50%;
+    text-align: center;
+}
+#menuIcons img{
+    margin-top: 5%;
+    width: 80%;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5), 0 10px 30px 0 rgba(0, 0, 0, 0.4);
+}
+#menuIcons img:hover{
+    cursor: pointer;
+}
+#menu-background{
+    position: absolute;
+    z-index: 1;
+    opacity: .85;
+    height: 100vh;
+}
+#full-breakfast-menu img, #full-dinner-menu img{
+    position: absolute;
+    z-index: 2;
+    margin-top: 5%;
+    width: 38%;
+    left: 0;
+    right: 0;
+    margin-left:auto;
+    margin-right:auto;
+}
+#full-dinner-menu img{
+    margin-top: 4%;
+}
+#exit img{
+    position: absolute;
+    z-index: 5;
+    margin-top: 4%;
+    margin-left: 96%;
+    width: 3%;
+}
+#exit img:hover{
+    cursor: pointer;
+}
+/* HIDING ALL POPUPS */
+#full-breakfast-menu{
+    display: none;
+}
+#exit{
+    display:none;
+}
+#menu-background{
+    display: none;
+}
+#full-dinner-menu{
+    display: none;
+}
+#reviews img{
+    max-width: 100%;
+    max-height: 100%;
+}
+#onlineRev{
+    margin-top: 5%;
+}
+
+
+
+
+
+/* STYLING OF REVIEWS */
+#reviews{
+    height: 100vh;
+}
+#cf, #cf1, #cf2, #cf3, #cf4, #cf5 {
+  position:relative;
+  height:25vh;
+}
+#reviews img{
+    filter: none; 
+    -webkit-filter: blur(0px); 
+    -moz-filter: blur(0px); 
+    -ms-filter: blur(0px);
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
+}
+#cf img, #cf1 img, #cf2 img, #cf3 img, #cf4 img, #cf5 img  {
+  position:absolute;
+  left:0;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+@keyframes cf3FadeInOut {
+    0% {
+      opacity:1;
+    }
+    25% {
+        opacity:1;
+    }
+    48% {
+        opacity:1;
+    }
+    55% {
+        opacity:0;
+    }
+    75% {
+        opacity:0;
+    }
+    100% {
+        opacity:0;
+    }
+}
+#cf img.top, #cf1 img.top, #cf2 img.top, #cf3 img.top, #cf4 img.top, #cf5 img.top{
+    animation-name: cf3FadeInOut;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    animation-direction: alternate;
+}
+#cf1 img.top{
+    animation-duration: 8s;
+} 
+#cf2 img.top{
+    animation-duration: 10s;
+}
+#cf3 img.top{
+    animation-duration: 13s;
+} 
+#cf4 img.top{
+    animation-duration: 6s;
+} 
+#cf5 img.top{
+    animation-duration: 9s;
+} 
+#reviews .col-sm-6, #reviews .col-12{
+    margin: 1%;
+    height: 50%;
+    border: 1px solid black;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5), 0 10px 30px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+#cf4 img, #cf2 img, #cf1 img{
+    margin-top: 5%;
+}
+
+
+
+
+
+/* STYLING OF RESERVATION INPUT */
+#reservationSelectionContainer{
+    height: 100vh;
+}
+#reservationSelectionContainer .col, #reservationSelectionContainer .col-3, #reservationSelectionContainer .col-4, #reservationSelectionContainer .col-7, #reservationSelectionContainer .col-2{
+    height: 10vh;
+}
+#reservationSelectionContainer .col h4, #reservationSelectionContainer .col-3 h4{
+    text-align: left;
+    padding-top: 10%;
+}
+#reservationSelectionContainer .col, #reservationSelectionContainer .col-6, #reservationSelectionContainer .col-12, #reservationSelectionContainer .col-3,
+#reservationSelectionContainer .col-4, #reservationSelectionContainer .col-4, #reservationSelectionContainer .col-5, #reservationSelectionContainer .col-7, #reservationSelectionContainer .col-2{
+    text-align: center;
+    /**border: 1px solid black;**/
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+#reservationSelectionContainer .col input, #reservationSelectionContainer .col-4 input, #reservationSelectionContainer .col-5 input, #reservationSelectionContainer .col-4 input, #reservationSelectionContainer .col select, #reservationSelectionContainer .col-6 input, #reservationSelectionContainer .col p{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: white;
+    height: 90%;
+    width: 100%;
+    margin-top: 2.5%;
+    border: 5px solid #7bc7dd;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 10px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    text-align: center;
+}
+#datePicker{
+    padding: 2%;
+    cursor: pointer;
+}
+#datePicker:hover{
+    cursor:pointer;
+}
+#reservationSelectionContainer select {
+    width: 90%;
+    padding-left: 15%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(arrow.png) 96% / 15% no-repeat #eee;
+    font-size: 90%;
+    color: gray;
+    text-align: center;
+}
+#reservationSelectionContainer select:hover{
+    cursor: pointer;
+}
+#reservationSelectionContainer .col p{
+    color: gray;
+    padding: 5%;
+}
+#reservationSelectionContainer input[type="submit"]{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 5px solid #7bc7dd;
+    width: 100%;
+    border-radius: 100px;
+    color: gray;
+    height: 90%;
+}
+#reservationSelectionContainer input:hover, #reservationSelectionContainer .col p:hover{
+    cursor: pointer;
+    background-color: #7bc7dd;
+    color: black;
+}
+#reservationSelectionContainer input[type="text"]:hover{
+    cursor:text;
+}
+
+
+#reservationSelectionContainer ul{
+    list-style-type:none;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+#reservationSelectionContainer li{
+    display:inline;
+    margin: 0;
+    padding: 0;
+}
+#reservationSelectionContainer #timeSelection .row{
+    height: 5vh;
+}
+#reservationSelectionContainer #timeSelection .col{
+    margin: 0;
+    padding: 0;
+    margin-left: 1%;
+}
+#reservationSelectionContainer #timeSelection .col p{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: white;
+    height: 45%;
+    width: 75%;
+    padding: 1%;
+    padding-top: 0;
+    border-radius: 100px;
+    text-align: center;
+}
+#reservationSelectionContainer #timeSelection p{
+    border: 5px solid gray;
+    border-radius: 100px; 
+}
+#reservationSelectionContainer #timeSelection p:hover{
+    cursor: not-allowed;
+    color: gray;
+}
+#reservationSelectionContainer .col #availableTime:hover{
+    cursor:pointer;
+    color:black;
+}
+#reservationSelectionContainer #timeSelection .row{
+    margin: 1%;
+}
+
+
+
+/* FAQ Styling */
+#faqs{
+    height: 100vh;
+    text-align: center;
+}
+#question{
+    font-size: 140%;
+    color: #7bc7dd;
+}
+#faqs img{
+    max-width: 80%;
+    margin-top: 5%;
+}
+#long img{
+    margin-top: 20%;
+}
+#faqs .row{
+    margin-top: 2%;
+    border: 1px solid black;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 10px 0 rgba(0, 0, 0, 0.4);
+}
+.vl {
+    display: inline;
+    border-left: 1px solid black;
+    height: 200%;
+}
+
+
+
+
+/*STORY STYLING*/
+#story{
+    height: 100vh;
+    text-align: center;
+}
+#story img, .mobileLayout img{
+    border: 1px solid black;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 10px 0 rgba(0, 0, 0, 0.4);
+    max-width: 95%;
+}
+#story h2, #story h5, .mobileLayout h2, .mobileLayout h5{
+    color: #7bc7dd;
+    margin-bottom: 1%;
+}
+#story p, .mobileLayout p{
+    margin: 3%;
+}
+.mobileLayout{
+    display: none;
+}
+
+
+/*LOCATION AND CONTACT STYLE*/
+#location{
+    text-align: center;
+    height: 100vh;
+}
+#location img{
+    padding: 5%;
+}
+#location .row .col-md-6 .row, #location .row .col-12 .row{
+    margin: 8%;
+    border: 1px solid black;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 10px 0 rgba(0, 0, 0, 0.4);
+}
+#map{
+    margin-top: 8%;
+}
+#location .col-2 img{
+    width: 100%;
+}  
+#socialMedia img{
+    max-width: 50%;
+    padding: 5%;
+}
+#map {
+    width: 100%;
+    height: 72%;
+ }
+#location h2{
+    color: #7bc7dd;
+}
+#location a{
+    text-decoration: none;
+    color: #7bc7dd;
+    font-size: 90%;
+}
+#mapContainer p span{
+    padding: 2%;
+    padding-right: 6%;
+    padding-left: 6%;
+    border: 2px solid #7bc7dd;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 10px 0 rgba(0, 0, 0, 0.4);
+}
+#mapContainer p span:hover{
+    cursor: pointer;
+    background-color: #7bc7dd;
+    border: 2px solid "black";
+}
+#mapContainer a{
+    color: black;
+    padding-right: 3%;
+    padding-left: 3%;
+}
+#emailAcct a h2{
+    font-size: 175%; 
+}
+
+
+
+/*RESIZING FOR MEDIUM SCREENS*/
+@media (max-width: 850px){
+    .bg .container-fluid #navbar a{
+        font-size: 90%;
+    }
+}
+@media (max-width: 767px){
+    .bg .container-fluid #navbar{
+        visibility: hidden;
+        font-size: 100%;
+    }
+    #hamburgerContainer{
+        visibility: visible;
+    }
+    #name{
+        margin-top: 35vh;
+        width: 85%;
+    }
+}
+
+@media (max-width: 600px){
+    #foodMenuIcons{
+        display: inline;
+        margin: 2%;
+    }
+    #foodPhotos{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #menuIcons{
+        width: 100%;
+    }
+    #foodPhotos img, #menuIcons img{
+        width: 70%;
+    }
+    #full-breakfast-menu img, #full-dinner-menu img{
+        position: absolute;
+        z-index: 2;
+        margin-top: 20%;
+        width: 90%;
+        left: 0;
+        right: 0;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    #full-dinner-menu img{
+        margin-top: 23%;
+    }
+    #exit img{
+        position: absolute;
+        z-index: 5;
+        margin-top: 11%;
+        margin-left: 96%;
+        width: 3%;
+    }
+    #cf, #cf1, #cf2, #cf3 {
+        height: 18vh;
+        margin: 2%;
+    }
+    #reviews .container .row img{
+        width: 200%;
+    }
+    #reviews{
+        height: 175vh;
+    }
+    #reviews .col-12{
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 15px 0 rgba(0, 0, 0, 0.4);
+        margin: 2%;
+    }
+    #reviews .container .row{
+        margin-bottom: 5%;
+    }
+    #reservationSelectionContainer h1{
+        display: none;
+    }
+    #reservationSelectionContainer p{
+        font-size: 90%;
+    }
+    #reservationSelectionContainer .row{
+        margin-top: 3.5%;
+    }
+    #webLayout {
+        display: none;
+    }
+    #story{
+        height: 190vh;
+    } 
+    .mobileLayout{
+        display: inline-block;
+    }
+    .vl{
+        display: none;
+    }
+    #faqs{
+        height: 180vh;
+    }   
+    #faqs .row{
+        margin-top: 2%;
+        border: none;
+        box-shadow: none;
+    }
+    #faqs img{
+        margin-top: 40%;
+    }
+    #emailAcct a h2{
+        font-size: 100%;
+    }
+    #map {
+        height: 230%;
+    }
+    #infoBottom{
+        margin-top: 75%;
+    }
+}
