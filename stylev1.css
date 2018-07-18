@@ -20,7 +20,7 @@ hr{
     background-size: cover;
 }
 #navbar, #hamburger-menu{
-    z-index: 5;
+    z-index: 6;
     position: fixed;
     top: 0;
     width: 100%;
@@ -398,8 +398,32 @@ hr{
 #reservationSelectionContainer #timeSelection .row{
     margin: 1%;
 }
+/*STYLING FOR RESERVATION CONFIRMATION AND INPUT*/ 
+#confirmScreen{
+    margin: 5%;
+    display: none;
+    background-color: #b6cfdb;
+    width: 50%;
+    margin-left: 25%;
+    border: 5px solid #7bc7dd;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 10px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+}
+#confirmationScreen1{
+    display: none;
+}
+#confirmationScreen2{
+    text-align: center;
+    display: none;
+}
+/*STYLING FOR RESERVATION CONFIRMATION AND INPUT*/ 
 
-
+#confirmScreen .row{
+    margin: 2%;
+}
+#reservationContainerScreen{
+    display: block;
+}
 
 /* FAQ Styling */
 #faqs{
@@ -506,9 +530,6 @@ hr{
     padding-right: 3%;
     padding-left: 3%;
 }
-#emailAcct a h2{
-    font-size: 100%; 
-}
 
 
 
@@ -596,7 +617,7 @@ hr{
         margin: 2%;
     }
     #reviews img{
-        margin-top: 15%;
+        margin-top: 5%;
     }
     #reviews .col-12{
         box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 15px 0 rgba(0, 0, 0, 0.4);
@@ -627,7 +648,7 @@ hr{
     }
     #emailAcct a h2{
         margin-top: 8%;
-        font-size: 100%;
+        font-size: 150%;
     }
     #emailAcct{
         height: 8vh;

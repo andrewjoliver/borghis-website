@@ -60,7 +60,6 @@ function myFunction(num) {
         value += 2;
         x++
     }
-    console.log(value + "  " + x);
     document.getElementById("myBar").style.width = (value) * 28.571429/4 + "%";
     navbarColor(x);
     
@@ -71,18 +70,28 @@ function myFunction(num) {
     }
 }
 myFunction();
+
+var dropDownButton = 0;
 function showDropDownMenu(){
-    $('#hamburgerContainer')[0].style.visibility = "hidden";
-    $(".bg .container-fluid #navbar")[0].style.visibility = "visible";
-    $(".progress-container")[0].style.visibility = "hidden";
+    if ($(window).width < 601){
+        if (dropDownButton % 2 == 0){
+            $(".bg .container-fluid #navbar")[0].style.visibility = "visible";
+            $(".progress-container")[0].style.visibility = "hidden";
+        }
+        else{
+            $(".bg .container-fluid #navbar")[0].style.visibility = "hidden";
+            $(".progress-container")[0].style.visibility = "visible";
+        }
+        dropDownButton++
+    }
 }
+
 //MAP
 function initMap() {
   var borghis = {lat: 39.063543, lng: -74.752921};
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 18, center: borghis});    
 }
-
 
 //RESERVATIONS
 var config = {
@@ -109,14 +118,16 @@ var app = new Vue({
             date: "",
             datePrint: "",
             time: "",
+            timePrint: "",
             size: "",
             email: "",
             phone: "",
             phonePrint: "",
             seating: "",
             accommodations: [],
-            accommodationsPrint: "",
+            accommodationsPrint: "None",
             other: "",
+            validTimes: [],
             
         };
     },
@@ -128,22 +139,33 @@ var app = new Vue({
           this.formatDate();
           this.checkAvailability();
       },
-      checkForm: function() {
+      confirm: function() {
           var checkedItems = [this.firstname, this.lastname, this.size, this.date, this.time, this.email, this.phone, this.seating];
           var checkedItemsDisplay = ["first name", "last name", "party size", "date", "time", "email", "phone number", "seating location"];
           for (var x= 0 ; x<8; x++){
               if (checkedItems[x] === ""){
                   alert("Please enter a " + checkedItemsDisplay[x]) + ".";
+                  return;
               }
           }
           if (! this.validEmail(this.email)){
               alert("Please enter a valid email");
+              return;
           }
-          if (! this.validPhone(this.phone)){
+          else if (! this.validPhone(this.phone)){
               alert("Please enter a valid phone number");
+              return;
           }
-          if (! this.validSize(this.size)){
+          else if (! this.validSize(this.size)){
               alert("Please enter a valid party size");
+              return;
+          }
+          else{
+              this.formatPhone(this.phone);
+              
+              $("#reservationContainerScreen")[0].style.display = "none";
+              $("#confirmScreen")[0].style.display = "flex";
+              $("#confirmationScreen1")[0].style.display = "block";
           }
     },
       validEmail:function(email) {    
@@ -170,17 +192,17 @@ var app = new Vue({
         return false;   
       },
       selectSeat: function(id, loc){
-          this.formatPhone(this.phone);
           this.seating = loc;
           $("#inside")[0].style.backgroundColor = "white";
           $("#outside")[0].style.backgroundColor = "white";
           $("#nopref")[0].style.backgroundColor = "white";
           $("#" + id)[0].style.backgroundColor = "#7bc7dd";
           $("#" + id)[0].style.color = "black";
+          this.checkAvailability();
       },
       selectAcc: function(id, acc){
           if (id === "other"){
-              console.log(app.other);
+              //console.log(app.other);
               this.accommodations.push(app.other);
               this.convertAcc(acc);
           }
@@ -226,16 +248,53 @@ var app = new Vue({
           finalStr += phoneNum.slice(6, 10);
           this.phonePrint = finalStr;
       },
-      selecTime: function(time){
-          this.time = time;
+      selectTime: function(time){ 
+          if (this.validTimes.includes(parseInt(time))){
+              this.time = time;
+              if (time === "1000"){
+                  this.timePrint = time.slice(0,2) + ":" + time.toString().slice(2,4);
+              }
+              else{
+                  this.timePrint = time.slice(0,1) + ":" + time.toString().slice(1,3);
+              }
+          }
+          var times = ["500", "530", "600", "630", "730", "800", "830", "900", "930", "1000"]; 
+          for (var k = 0; k<times.length; k++){
+            $("#time" + times[k] +" p")[0].style.backgroundColor = "white";
+            $("#time" + times[k] +" p")[0].style.color = "gray";
+          }
+          $("#time" + time.toString() +" p")[0].style.backgroundColor = "#7bc7dd";
+          $("#time" + time.toString() +" p")[0].style.color = "#000";
       },
       checkAvailability: function(){
-          var inputDate = this.datePrint;
-          var inputSize = this.size;
-          var weekday = String(this.date).slice(0,3);
-          var flag = "";
+        
+        if (this.date.length < 1 || this.size.length < 1 || this.seating.length < 1){
+            return;
+        }  
+        
+        var inputDate = this.datePrint;
+        var inputSize = this.size;
+        var weekday = String(this.date).slice(0,3);
+        var flag = "";
+        var times = [500, 530, 600, 630, 730, 800, 830, 900, 930, 1000]; 
+        var noData = false;
+        var currReservationBefore = 0;
+        var currReservationAfter = 0;
+        var currReservationInsideBefore = 0;
+        var currReservationInsideAfter = 0;
+        var currReservationOutsideBefore = 0;
+        var currReservationOutsideAfter = 0;
+        
+        //SHOW ALL OPTIONS AS UNAVAILABLE  
+        for (var r=0; r < times.length; r++){    
+            $("#time" + times[r] +" p")[0].style.border = "5px solid gray";
+            $("#time" + times[r]  +" p")[0].style.cursor = "not-allowed";   
+            $("#time" + times[r]  +" p")[0].style.color = "gray"; 
+            $("#time" + times[r]  +" p")[0].style.backgroundColor = "white"; 
+            $("#time" + times[r]  +" p")[0].style.borderRadius = "100px";
+        }
           
-          reservationsLogRef.on('value', getData, errorData);
+        reservationsLogRef.on('value', getData, errorData);
 
         function getData(data){
             var reservations = data.val();
@@ -245,17 +304,24 @@ var app = new Vue({
                 var k = keys[i];
                 if (reservations[k].date === inputDate){
                     flag = keys[i];
+                    return;
                 }
-            } 
+            }
+            for (var w = 0; w < times.length; w++){
+                showValidTime(times[w])
+                noData = true;
+            }
         }
-          
+        if (noData){
+            return;
+        }
         function errorData(err){
             console.log(err);
         }
         function eatingTime(week, time, size){
             var monWed = [130, 145, 145, 200, 215, 215];
             var thuSun = [145, 200, 200, 215, 230, 230];
-            
+                        
             if (week === "monWed"){
                 if (size < 4){
                     return formatNumToHour(time+monWed[0]);
@@ -276,7 +342,27 @@ var app = new Vue({
                     return formatNumToHour(time+monWed[5]);
                 }
             }
-        }
+            else{
+                if (size < 4){
+                    return formatNumToHour(time+thuSun[0]);
+                }
+                else if (size < 6){
+                    return formatNumToHour(time+thuSun[1]);
+                }
+                else if (size < 8){
+                    return formatNumToHour(time+thuSun[2]);
+                }
+                else if (size < 11){
+                    return formatNumToHour(time+thuSun[3]);
+                }
+                else if (size < 16){
+                    return formatNumToHour(time+thuSun[4]);
+                }
+                else if (size < 21){
+                    return formatNumToHour(time+thuSun[5]);
+                }
+            }
+        }   
         function formatNumToHour(num){
             var hour = Math.floor(num / 100) * 100;
             if (num % 100 > 59){
@@ -285,46 +371,149 @@ var app = new Vue({
             var min = num % 100 % 60;
             return hour+min;
         }
-          
         function showValidTime(time){
-            $("#time" + time.toString()).replaceWith("<div id=\"time" + time.toString() + "\" class=\"col\" @click=\"selectTime(\"" + time.toString() + "\")\"><p id=\"availableTime\">" + time.slice(0,1) + ":" + time.slice(1,3) + "</p></div>");
+            if (time === 1000){
+               $("#time" + time.toString()).replaceWith("<div id=\"time" + time.toString() + "\" class=\"col\"><p onclick=\"app.selectTime(\'" + time.toString() + "\')\" id=\"availableTime\">" + time.toString().slice(0,2) + ":" + time.toString().slice(2,4) + "</p></div>"); 
+            }
+            else{
+                $("#time" + time.toString()).replaceWith("<div id=\"time" + time.toString() + "\" class=\"col\"><p onclick=\"app.selectTime(\'" + time.toString() + "\')\" id=\"availableTime\">" + time.toString().slice(0,1) + ":" + time.toString().slice(1,3) + "</p></div>");
+            }
+            
             $("#time" + time.toString() +" p")[0].style.border = "5px solid #7bc7dd";
+            
             $("#time" + time.toString() +" p")[0].style.borderRadius = "100px";
         }   
+        function countReservations(weekTime, childNodes, times, inputSize){
+            
+            var timeOfDBReservation = parseInt(childNodes.val().time.replace(":", "").replace(" PM", "").replace(" ", "").trim());
+            
+            var duration = eatingTime(weekTime, timeOfDBReservation, parseInt(childNodes.val().size));
+                        
+            var seatedDuration = eatingTime(weekTime, times[y], inputSize);
+            
+            //BEFORE
+            if (duration >= times[y] && times[y] >= timeOfDBReservation){
+                currReservationBefore += parseInt(childNodes.val().size);
+            }
+            //AFTER
+            if ( times[y] <= timeOfDBReservation &&  timeOfDBReservation <= seatedDuration ){
+                currReservationAfter += parseInt(childNodes.val().size);
+            }
+        }
+        function countReservationsNoPref(weekTime, childNodes, times, inputSize, locationOfReservation){
+            
+            var timeOfDBReservation = parseInt(childNodes.val().time.replace(":", "").replace(" PM", "").replace(" ", "").trim());
+            
+            var duration = eatingTime(weekTime, timeOfDBReservation, parseInt(childNodes.val().size));
+                        
+            var seatedDuration = eatingTime(weekTime, times[y], inputSize);
+            
+            
+            //BEFORE
+            if (locationOfReservation === "inside" && duration >= times[y] && times[y] >= timeOfDBReservation){
+                currReservationInsideBefore += parseInt(childNodes.val().size);
+            }
+            //AFTER
+            if (locationOfReservation === "inside" && times[y] <= timeOfDBReservation &&  timeOfDBReservation <= seatedDuration ){
+                currReservationInsideAfter += parseInt(childNodes.val().size);
+            }
+            
+            
+            if (locationOfReservation === "outside" && duration >= times[y] && times[y] >= timeOfDBReservation){
+                currReservationOutsideBefore += parseInt(childNodes.val().size);
+            }
+            //AFTER
+            if (locationOfReservation === "outside" && times[y] <= timeOfDBReservation &&  timeOfDBReservation <= seatedDuration ){
+                currReservationOutsideAfter += parseInt(childNodes.val().size);
+            }
+            
+        } 
         
-          var times = [500, 530, 600, 630, 730, 800, 830, 900, 930, 1000]; 
-          
-        db.ref("reservations/" + flag + "/info/").on("value", function(snapshot) {
+        //LOOP OVER DATABASE FOR EACH TIME
+        for (var y=0; y<times.length; y++){
+            currReservationBefore = 0;
+            currReservationAfter = 0;
+            
+            currReservationInsideBefore = 0;
+            currReservationInsideAfter = 0;
+            currReservationOutsideBefore = 0;
+            currReservationOutsideAfter = 0;
+            
+            var requestedSeatingLocation = app.seating.toLowerCase();            
+            //CONVERT ALL INSIDE TABLES TO INSIDE
+            
+            db.ref("reservations/" + flag + "/info/").on("value", function(snapshot) {
               snapshot.forEach(function(childNodes){
-                  var currReservationNum = 0;
-                  if (childNodes.val().location.toLowerCase() === app.seating.toLowerCase()){
+                  
+                  var locationOfReservation = childNodes.val().location.toLowerCase();
+                  if (locationOfReservation === "w1" | locationOfReservation === "w2" | locationOfReservation === "w3" | locationOfReservation === "inside 4" | locationOfReservation === "inside 5"){
+                          locationOfReservation = "inside";
+                  }
+                  //CONVERT ALL OUTSIDE TABLES TO OUTSIDE 
+                  else if (locationOfReservation === "sunset"){
+                      locationOfReservation = "outside";
+                  }
+
+                  if (locationOfReservation === requestedSeatingLocation){
                       if (weekday === "Mon" || weekday === "Tue" || weekday === "Wed"){
-                          
-                          var timeNum = parseInt(childNodes.val().time.replace(":", ""))
-                          var seatedDuration = eatingTime("monWed", timeNum, childNodes.val().size);
-                          
-                          for (var x = 0 ; x < times.length; x++){
-                              if ( eatingTime("monWed", times[x], inputSize) < timeNum ){
-                                  currReservationNum += parseInt(childNodes.val().size);
-                                  
-                              }
-                              if (timeNum < times[x] && times[x] < seatedDuration){
-                                  currReservationNum += parseInt(childNodes.val().size);
-                              }
-                              if (currReservationNum + inputSize < 21){
-                                  showValidTime(times[x].toString());
-                              }
-                          }
-                          
+                          countReservations("monWed", childNodes, times, inputSize)
                       }
-                      else{}
+                      else{
+                          countReservations("thursSun", childNodes, times, inputSize)
+                      }
+                  }
+                  else if (requestedSeatingLocation === "no preference"){
+                      if (weekday === "Mon" || weekday === "Tue" || weekday === "Wed"){
+                          countReservationsNoPref("monWed", childNodes, times, inputSize, locationOfReservation)
+                      }
+                      else{
+                          countReservationsNoPref("thursSun", childNodes, times, inputSize, locationOfReservation)
+                      }
                   }
               });
-            },
-            function (errorObject) {
-              console.log("The read failed: " + errorObject.code);
-            });  
-        },
+          },
+        function (errorObject) {
+                  console.log("The read failed: " + errorObject.code);
+        }); 
+            
+        if (requestedSeatingLocation !== "no preference" && currReservationBefore + parseInt(inputSize) < 21 && + currReservationAfter + parseInt(inputSize) < 21){
+            app.validTimes.push(times[y]);
+            showValidTime(times[y]);
+        }
+        else if (requestedSeatingLocation === "no preference"){
+                var roomOutside = (currReservationOutsideAfter + parseInt(inputSize) < 21 && currReservationOutsideBefore + parseInt(inputSize) < 21);
+                var roomInside = (currReservationInsideAfter + parseInt(inputSize) < 21 && currReservationInsideBefore + parseInt(inputSize) < 21);
+        
+                if (roomOutside  || roomInside ){
+                    app.validTimes.push(times[y]);
+                    showValidTime(times[y]);
+                }
+        }
+        //console.log("+++++++++++++")
+      }
+    },
+      sendEmail: function(){
+          $("#confirmationScreen1")[0].style.display = "none";
+          $("#confirmationScreen2")[0].style.display = "block";
+          Email.send("andrewjoliver3@gmail.com",
+            "ajo14@duke.edu",
+            "DELETE ME - Reservation",
+            "Party Name: " + this.firstname + " " + this.lastname 
+            + '<br/>' + "Date: " + this.datePrint 
+            + '<br/>' + "Number of guests: " + this.size 
+            + '<br/>' + "Time: " + this.time 
+            + '<br/>' + "Seating Preference: " + this.seating 
+            + '<br/>' + "Party Accommodations: " + this.accommodationsPrint 
+            + '<br/>' + "Phone Number: " + this.phonePrint 
+            + '<br/>' + "Email: " + this.email 
+            + '<br/>' + "------------------",
+            "smtp.elasticemail.com",
+            "andrewjoliver3@gmail.com",
+            "20fde7aa-c0a4-4289-84e1-859febb782fc",
+            function done(message) { return; } 
+          );
+          
+      },    
   },
     firebase() {
         return {
