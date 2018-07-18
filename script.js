@@ -106,6 +106,8 @@ var db = firebase.initializeApp(config).database();
 var reservationsLogRef = db.ref('reservations');
 Vue.use(VueFire);
 
+var validTimes = [];
+
 var app = new Vue({
     el: "#reservationSelectionContainer",
     
@@ -127,8 +129,6 @@ var app = new Vue({
             accommodations: [],
             accommodationsPrint: "None",
             other: "",
-            validTimes: [],
-            
         };
     },
     components: {
@@ -140,7 +140,7 @@ var app = new Vue({
           this.checkAvailability();
       },
       confirm: function() {
-          var checkedItems = [this.firstname, this.lastname, this.size, this.date, this.time, this.email, this.phone, this.seating];
+          var checkedItems = [this.firstname, this.lastname, this.size, this.date, this.timePrint, this.email, this.phone, this.seating];
           var checkedItemsDisplay = ["first name", "last name", "party size", "date", "time", "email", "phone number", "seating location"];
           for (var x= 0 ; x<8; x++){
               if (checkedItems[x] === ""){
@@ -249,7 +249,7 @@ var app = new Vue({
           this.phonePrint = finalStr;
       },
       selectTime: function(time){ 
-          if (this.validTimes.includes(parseInt(time))){
+          if (validTimes.includes(parseInt(time))){
               this.time = time;
               if (time === "1000"){
                   this.timePrint = time.slice(0,2) + ":" + time.toString().slice(2,4);
@@ -378,6 +378,7 @@ var app = new Vue({
             else{
                 $("#time" + time.toString()).replaceWith("<div id=\"time" + time.toString() + "\" class=\"col\"><p onclick=\"app.selectTime(\'" + time.toString() + "\')\" id=\"availableTime\">" + time.toString().slice(0,1) + ":" + time.toString().slice(1,3) + "</p></div>");
             }
+            this.validTimes.push(time);
             
             $("#time" + time.toString() +" p")[0].style.border = "5px solid #7bc7dd";
             
@@ -477,17 +478,15 @@ var app = new Vue({
         }); 
             
         if (requestedSeatingLocation !== "no preference" && currReservationBefore + parseInt(inputSize) < 21 && + currReservationAfter + parseInt(inputSize) < 21){
-            app.validTimes.push(times[y]);
             showValidTime(times[y]);
         }
         else if (requestedSeatingLocation === "no preference"){
-                var roomOutside = (currReservationOutsideAfter + parseInt(inputSize) < 21 && currReservationOutsideBefore + parseInt(inputSize) < 21);
-                var roomInside = (currReservationInsideAfter + parseInt(inputSize) < 21 && currReservationInsideBefore + parseInt(inputSize) < 21);
-        
-                if (roomOutside  || roomInside ){
-                    app.validTimes.push(times[y]);
-                    showValidTime(times[y]);
-                }
+            var roomOutside = (currReservationOutsideAfter + parseInt(inputSize) < 21 && currReservationOutsideBefore + parseInt(inputSize) < 21);
+            var roomInside = (currReservationInsideAfter + parseInt(inputSize) < 21 && currReservationInsideBefore + parseInt(inputSize) < 21);
+
+            if (roomOutside  || roomInside ){
+                showValidTime(times[y]);
+            }
         }
         //console.log("+++++++++++++")
       }
