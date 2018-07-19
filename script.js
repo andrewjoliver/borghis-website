@@ -107,6 +107,7 @@ var reservationsLogRef = db.ref('reservations');
 Vue.use(VueFire);
 
 var validTimes = [];
+var flagMain = "";
 
 var app = new Vue({
     el: "#reservationSelectionContainer",
@@ -303,7 +304,9 @@ var app = new Vue({
             for (var i = 0; i < keys.length; i++){
                 var k = keys[i];
                 if (reservations[k].date === inputDate){
+                    this.flagMain = flag;
                     flag = keys[i];
+                    flagMain = flag;
                     return;
                 }
             }
@@ -500,7 +503,7 @@ var app = new Vue({
             "Party Name: " + this.firstname + " " + this.lastname 
             + '<br/>' + "Date: " + this.datePrint 
             + '<br/>' + "Number of guests: " + this.size 
-            + '<br/>' + "Time: " + this.time 
+            + '<br/>' + "Time: " + this.timePrint 
             + '<br/>' + "Seating Preference: " + this.seating 
             + '<br/>' + "Party Accommodations: " + this.accommodationsPrint 
             + '<br/>' + "Phone Number: " + this.phonePrint 
@@ -511,6 +514,15 @@ var app = new Vue({
             "20fde7aa-c0a4-4289-84e1-859febb782fc",
             function done(message) { return; } 
           );
+          db.ref('reservations/' + flagMain + '/info/').push({
+                size: this.size,
+                time : this.timePrint,
+                location: this.seating,
+                name: this.firstname + " " + this.lastname,
+                phone: this.phonePrint,
+                email: this.email,
+                accommodations: this.accommodationsPrint
+            });
           
       },    
   },
