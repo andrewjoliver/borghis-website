@@ -261,8 +261,10 @@ var app = new Vue({
           }
           var times = ["500", "530", "600", "630", "730", "800", "830", "900", "930", "1000"]; 
           for (var k = 0; k<times.length; k++){
-            $("#time" + times[k] +" p")[0].style.backgroundColor = "white";
-            $("#time" + times[k] +" p")[0].style.color = "gray";
+            if (validTimes.includes(parseInt(times[k]))){
+                $("#time" + times[k] +" p")[0].style.backgroundColor = "white";
+                $("#time" + times[k] +" p")[0].style.color = "gray";
+            }
           }
           $("#time" + time.toString() +" p")[0].style.backgroundColor = "#7bc7dd";
           $("#time" + time.toString() +" p")[0].style.color = "#000";
@@ -287,11 +289,20 @@ var app = new Vue({
         var currReservationOutsideAfter = 0;
         
         //SHOW ALL OPTIONS AS UNAVAILABLE  
-        for (var r=0; r < times.length; r++){    
+        for (var r=0; r < times.length; r++){ 
+            //MAKE SURE ALL TIMES ARE INVALID
+            if (times[r] === 1000){
+               $("#time" + times[r].toString()).replaceWith("<div id=\"time" + times[r].toString() + "\" class=\"col\"><p id=\"availableTime\">" + times[r].toString().slice(0,2) + ":" + times[r].toString().slice(2,4) + "</p></div>"); 
+            }
+            else{
+                $("#time" + times[r].toString()).replaceWith("<div id=\"time" + times[r].toString() + "\" class=\"col\"><p id=\"availableTime\">" + times[r].toString().slice(0,1) + ":" + times[r].toString().slice(1,3) + "</p></div>");
+            }
+            
+            //RESTYLE
             $("#time" + times[r] +" p")[0].style.border = "5px solid gray";
             $("#time" + times[r]  +" p")[0].style.cursor = "not-allowed";   
             $("#time" + times[r]  +" p")[0].style.color = "gray"; 
-            $("#time" + times[r]  +" p")[0].style.backgroundColor = "white"; 
+            $("#time" + times[r]  +" p")[0].style.backgroundColor = "gray"; 
             $("#time" + times[r]  +" p")[0].style.borderRadius = "100px";
         }
           
@@ -384,7 +395,7 @@ var app = new Vue({
             this.validTimes.push(time);
             
             $("#time" + time.toString() +" p")[0].style.border = "5px solid #7bc7dd";
-            
+            $("#time" + time.toString() +" p")[0].style.backgroundColor = "white";
             $("#time" + time.toString() +" p")[0].style.borderRadius = "100px";
         }   
         function countReservations(weekTime, childNodes, times, inputSize){
@@ -524,7 +535,11 @@ var app = new Vue({
                 accommodations: this.accommodationsPrint
             });
           
-      },    
+      },
+        partyInfo: function(){
+            $("#reservationScreen1")[0].style.display = "none";
+            $("#reservationScreen2")[0].style.display = "block";
+        },
   },
     firebase() {
         return {
@@ -532,3 +547,7 @@ var app = new Vue({
         };
     },
 });
+
+
+//SET DEFAULT SEATING PREFERENCE TO NO PREF
+app.selectSeat('nopref', 'No Preference')

@@ -294,18 +294,21 @@ hr{
     margin-top: 1%;
     margin-bottom: 1%;
 }
-#reservationSelectionContainer .col input, #reservationSelectionContainer .col-4 input, #reservationSelectionContainer .col-5 input, #reservationSelectionContainer .col-4 input, #reservationSelectionContainer .col select, #reservationSelectionContainer .col-6 input, #reservationSelectionContainer .col p{
+#reservationSelectionContainer .col input, #reservationSelectionContainer .col-4 input, #reservationSelectionContainer .col-5 input, #reservationSelectionContainer .col-4 input, #reservationSelectionContainer .col select, #reservationSelectionContainer .col-6 input, #reservationSelectionContainer .col p, #button h6{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background-color: white;
-    height: 90%;
+    height: 100%;
     width: 100%;
     margin-top: 2.5%;
     border: 5px solid #7bc7dd;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 10px 0 rgba(0, 0, 0, 0.4);
     border-radius: 20px;
     text-align: center;
+}
+#button h6{
+    height: auto;
 }
 #datePicker{
     padding: 2%;
@@ -375,7 +378,8 @@ hr{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-color: white;
+    background-color: gray;
+    color: dimgray;
     height: 45%;
     width: 75%;
     padding: 1%;
@@ -401,6 +405,7 @@ hr{
 /*STYLING FOR RESERVATION CONFIRMATION AND INPUT*/ 
 #confirmScreen{
     margin: 5%;
+    margin-top: 0;
     display: none;
     background-color: #b6cfdb;
     width: 50%;
@@ -416,14 +421,35 @@ hr{
     text-align: center;
     display: none;
 }
+
 /*STYLING FOR RESERVATION CONFIRMATION AND INPUT*/ 
 
 #confirmScreen .row{
     margin: 2%;
+    margin-top: 0;
 }
 #reservationContainerScreen{
     display: block;
 }
+#reservationScreen1, #reservationScreen2{
+    margin-bottom: 10%;
+}
+#reservationSelectionContainer h1{
+    text-decoration: underline;
+    color: #7bc7dd;
+}
+#reservationScreen2{
+    display: none;
+}
+#button h6{
+    color:gray;
+}
+#button h6:hover{
+    background-color: #7bc7dd;
+    color:black;
+    cursor: pointer;
+}
+
 
 /* FAQ Styling */
 #faqs{

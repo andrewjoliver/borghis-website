@@ -35,8 +35,8 @@
     <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
 
     <!-- javascript and css styling for this page -->
-    <link rel="stylesheet" href="stylev1.css">
-    <script src="script.js" async></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="scriptv1.js" async></script>
     
     <!-- Maps API Integration -->
     <script async defer
@@ -216,6 +216,11 @@
     <a id="reservationsJump"><hr></a>
     
     <div id="reservationSelectionContainer">
+        <div class="row">
+            <div class="col">
+                <h1>Reservations</h1>
+            </div>
+        </div>
         <div id="confirmScreen">
             <div class="container">
                 <div id="confirmationScreen1">
@@ -268,101 +273,117 @@
             </div>
         </div>
         <div id="reservationContainerScreen" class="container">
-            <div class="row">
-                <div class="col">
-                    <input id="firstname" placeholder="First Name" type="text" v-model="firstname">
-                </div>
-                <div class="col">
-                    <input id="lastname" placeholder="Last Name" type="text" v-model="lastname">
-                </div>
-                <div class="col">
-                    <input id="size" onblur="app.checkAvailability()" placeholder="Party Size" type="text" v-model="size">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <p id="inside" @click="selectSeat('inside', 'Inside')">Seated Inside</p>
-                </div>
-                <div class="col">
-                    <p id="outside" @click="selectSeat('outside', 'Outside')">Seated Outside</p>
-                </div>
-                <div class="col">
-                    <p id="nopref" @click="selectSeat('nopref', 'No Preference')">No Seating Preference</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div id="datePickerContainer" class="col-12 col-md-6 col">
-                    <vuejs-datepicker @closed="closedDateSelection()" id="datePicker" placeholder="Select Date" v-model="date"></vuejs-datepicker>  
-                </div>
-                <div class="col-12 col-md-6 col">
-                    <div id="timeSelection" class="container">
-                        <div class="row">
-                            <div id="time500" class="col">
-                                <p>5:00</p>
-                            </div>
-                            <div id="time530" class="col">
-                                <p>5:30</p>
-                            </div>
-                            <div id="time600" class="col">
-                                <p>6:00</p>
-                            </div>
-                            <div id="time630" class="col">
-                                <p>6:30</p>
-                            </div>
-                            <div id="time730" class="col">
-                                <p>7:30</p>
+            
+            <div id="reservationScreen1">
+                <div class="container">
+                    <div class="row">
+                        <div id="datePickerContainer" class="col-12 col-md-6 col">
+                            <vuejs-datepicker @closed="closedDateSelection()" id="datePicker" placeholder="Select Date" v-model="date"></vuejs-datepicker>  
+                        </div>
+                        <div class="col-12 col-md-6 col">
+                            <input id="size" onblur="app.checkAvailability()" placeholder="Party Size" type="text" v-model="size">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p id="inside" @click="selectSeat('inside', 'Inside')">Seated Inside</p>
+                        </div>
+                        <div class="col">
+                            <p id="outside" @click="selectSeat('outside', 'Outside')">Seated Outside</p>
+                        </div>
+                        <div class="col">
+                            <p id="nopref" @click="selectSeat('nopref', 'No Preference')">No Seating Preference</p>
+                        </div>
+                    </div>
+                    <div class="row">                
+                        <div class="col-12">
+                            <div id="timeSelection" class="container">
+                                <div class="row">
+                                    <div id="time500" class="col">
+                                        <p>5:00</p>
+                                    </div>
+                                    <div id="time530" class="col">
+                                        <p>5:30</p>
+                                    </div>
+                                    <div id="time600" class="col">
+                                        <p>6:00</p>
+                                    </div>
+                                    <div id="time630" class="col">
+                                        <p>6:30</p>
+                                    </div>
+                                    <div id="time730" class="col">
+                                        <p>7:30</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="time800" class="col">
+                                        <p>8:00</p>
+                                    </div>
+                                    <div id="time830" class="col">
+                                        <p>8:30</p>
+                                    </div>
+                                    <div id="time900" class="col">
+                                        <p>9:00</p>
+                                    </div>
+                                    <div id="time930" class="col">
+                                        <p>9:30</p>
+                                    </div>
+                                    <div id="time1000" class="col">
+                                        <p>10:00</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div> 
+                    <div id="button">
                         <div class="row">
-                            <div id="time800" class="col">
-                                <p>8:00</p>
+                            <div class="col-4"></div>
+                            <div class="col-4">
+                                <h6 @click="partyInfo">Enter Party Info</h6>
                             </div>
-                            <div id="time830" class="col">
-                                <p>8:30</p>
-                            </div>
-                            <div id="time900" class="col">
-                                <p>9:00</p>
-                            </div>
-                            <div id="time930" class="col">
-                                <p>9:30</p>
-                            </div>
-                            <div id="time1000" class="col">
-                                <p>10:00</p>
-                            </div>
+                            <div class="col-4"></div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col">
-                    <input id="email" placeholder="Email" type="text" v-model="email">
+            <div id="reservationScreen2">
+                <div class="row">
+                    <div class="col">
+                        <input id="firstname" placeholder="First Name" type="text" v-model="firstname">
+                    </div>
+                    <div class="col">
+                        <input id="lastname" placeholder="Last Name" type="text" v-model="lastname">
+                    </div>
                 </div>
-                <div class="col">
-                    <input id="phone" placeholder="Phone Number" type="text" v-model="phone">
-                </div>
-            </div>
 
-            <div class="row">
-              <div class="col">
-                <p id="highchair" @click="selectAcc('highchair', 'Highchair')">High Chair Required</p>
-              </div>
-              <div class="col">
-                <p id="ada" @click="selectAcc('ada', 'ADA Access')">ADA Access Required</p>
-              </div>
-              <div class="col">
-                <input id="other" @click="selectAcc('other', '')" placeholder="Other" type="text" v-model="other">
-              </div>
-            </div>
-
-            <div class="row">
-                <div class="col-4"></div>
-                <div class="col-4 align-self-center">
-                    <input type="submit" value="Request" @click="confirm()">  
+                <div class="row">
+                    <div class="col">
+                        <input id="email" placeholder="Email" type="text" v-model="email">
+                    </div>
+                    <div class="col">
+                        <input id="phone" placeholder="Phone Number" type="text" v-model="phone">
+                    </div>
                 </div>
-                <div class="col-4"></div>
+
+                <div class="row">
+                  <div class="col">
+                    <p id="highchair" @click="selectAcc('highchair', 'Highchair')">High Chair Required</p>
+                  </div>
+                  <div class="col">
+                    <p id="ada" @click="selectAcc('ada', 'ADA Access')">ADA Access Required</p>
+                  </div>
+                  <div class="col">
+                    <input id="other" @click="selectAcc('other', '')" placeholder="Other" type="text" v-model="other">
+                  </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <input type="submit" value="Request" @click="confirm()">  
+                    </div>
+                    <div class="col-4"></div>
+                </div>
             </div>
         </div>
     </div>
