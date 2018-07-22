@@ -73,7 +73,7 @@ myFunction();
 
 var dropDownButton = 0;
 function showDropDownMenu(){
-    if ($(window).width < 601){
+    if ($(window).width() < 601){
         if (dropDownButton % 2 == 0){
             $(".bg .container-fluid #navbar")[0].style.visibility = "visible";
             $(".progress-container")[0].style.visibility = "hidden";
