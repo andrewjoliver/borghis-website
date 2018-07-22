@@ -164,9 +164,11 @@ var app = new Vue({
           else{
               this.formatPhone(this.phone);
               
-              $("#reservationContainerScreen")[0].style.display = "none";
+              $("#reservationScreen2")[0].style.display = "none";
               $("#confirmScreen")[0].style.display = "flex";
               $("#confirmationScreen1")[0].style.display = "block";
+              $("#backArrow1")[0].style.display = "none";
+              $("#backArrow2")[0].style.display = "block";
           }
     },
       validEmail:function(email) {    
@@ -275,6 +277,8 @@ var app = new Vue({
             return;
         }  
         
+        validTimes = [];  
+          
         var inputDate = this.datePrint;
         var inputSize = this.size;
         var weekday = String(this.date).slice(0,3);
@@ -538,7 +542,22 @@ var app = new Vue({
       },
         partyInfo: function(){
             $("#reservationScreen1")[0].style.display = "none";
+            $("#placeholderCol")[0].style.display = "none";
             $("#reservationScreen2")[0].style.display = "block";
+            $("#backArrow1")[0].style.display = "block";            
+        },
+        partyInfoBack: function(){
+            $("#confirmScreen")[0].style.display = "none";
+            $("#placeholderCol")[0].style.display = "none";
+            $("#backArrow2")[0].style.display = "none";
+            $("#reservationScreen2")[0].style.display = "inline";
+            $("#backArrow1")[0].style.display = "block";   
+        },
+        timingInfo: function(){
+            $("#reservationScreen1")[0].style.display = "block";
+            $("#placeholderCol")[0].style.display = "block";
+            $("#reservationScreen2")[0].style.display = "none";
+            $("#backArrow1")[0].style.display = "none";
         },
   },
     firebase() {

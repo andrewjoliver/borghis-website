@@ -216,13 +216,24 @@
     <a id="reservationsJump"><hr></a>
     
     <div id="reservationSelectionContainer">
-        <div class="row">
-            <div class="col">
-                <h1>Reservations</h1>
+        <div id="reservationsHeader">
+            <div class="row">
+                <div id="placeholderCol" class="col-2 col-md-3">
+                </div>
+                <div id="backArrow1" class="col-2 col-md-3">
+                    <h1 @click="timingInfo">&#8678;</h1>
+                </div>
+                <div id="backArrow2" class="col-2 col-md-3">
+                    <h1 @click="partyInfoBack">&#8678;</h1>
+                </div>
+                <div class="col-8 col-md-6 align-self-center">
+                    <h1>Reservations</h1>
+                </div>
+                <div class="col-2 col-md-3"></div>
             </div>
         </div>
         <div id="confirmScreen">
-            <div class="container">
+            <div class="container-fluid">
                 <div id="confirmationScreen1">
                     <div class="row">
                         <div class="col">
@@ -260,11 +271,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-8">
                             <input type="submit" value="Confirm and Request" @click="sendEmail()">  
                         </div>
-                        <div class="col-3"></div>
+                        <div class="col-2"></div>
                     </div>
                 </div>
                 <div id="confirmationScreen2">
@@ -337,11 +348,11 @@
                     </div> 
                     <div id="button">
                         <div class="row">
-                            <div class="col-4"></div>
-                            <div class="col-4">
+                            <div class="col-2 col-md-4"></div>
+                            <div class="col-8 col-md-4">
                                 <h6 @click="partyInfo">Enter Party Info</h6>
                             </div>
-                            <div class="col-4"></div>
+                            <div class="col-2 col-md-4"></div>
                         </div>
                     </div>
                 </div>

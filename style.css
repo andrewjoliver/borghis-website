@@ -449,7 +449,18 @@ hr{
     color:black;
     cursor: pointer;
 }
-
+#backArrow1, #backArrow2{
+    display: none;
+}
+#backArrow1 h1, #backArrow2 h1{
+    text-decoration: none;
+}
+#backArrow1:hover, #backArrow2:hover{
+    cursor:pointer;
+}
+#reservationsHeader{
+    text-align: center
+}
 
 /* FAQ Styling */
 #faqs{
@@ -557,8 +568,6 @@ hr{
     padding-left: 3%;
 }
 
-
-
 /*RESIZING FOR MEDIUM SCREENS*/
 @media (max-width: 1020px){
     #reviews .col-sm-1{
@@ -654,6 +663,9 @@ hr{
     #reservationSelectionContainer h1{
         display: none;
     }
+    #reservationsHeader h1{
+        display: inline;
+    }
     #reservationSelectionContainer p,  #reservationSelectionContainer input{
         font-size: 90%;
     }
@@ -687,5 +699,9 @@ hr{
     }
     hr{
         margin-bottom: 15%;
+    }
+    #confirmScreen{
+        margin: 5%;
+        width: 90%;
     }
 }
