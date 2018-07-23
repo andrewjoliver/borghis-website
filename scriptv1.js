@@ -323,8 +323,11 @@ var app = new Vue({
                     flagMain = flag;
                     return;
                 }
-            }    
+            }
+            console.log("input date length" + inputDate.length);
+            console.log("flag main lenght" + flagMain);
             if (inputDate.length > 1 && flagMain < 1){
+                console.log("true");
                 reservationsLogRef.push({
                     date: inputDate,
                     info: [],
