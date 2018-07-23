@@ -714,4 +714,7 @@ hr{
     #confirmRequestButton input{
         background-color:white
     }
+    #confirmRequestButton{
+        text-align: center;
+    }
 }
