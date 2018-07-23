@@ -461,6 +461,9 @@ hr{
 #reservationsHeader{
     text-align: center
 }
+#inputButton input{
+    background-color: white;
+}
 
 /* FAQ Styling */
 #faqs{
