@@ -554,3 +554,5 @@ var app = new Vue({
     },
 });
 app.selectSeat('nopref', 'No Preference')
+Vue.config.devtools = false;
+Vue.config.productionTip = false;
