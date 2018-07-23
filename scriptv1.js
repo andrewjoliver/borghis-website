@@ -1,3 +1,8 @@
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-122758714-1');
 $("a").on('click', function(event) {
     if (this.hash !== "") {
       event.preventDefault();
