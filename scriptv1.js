@@ -100,7 +100,7 @@ var config = {
     messagingSenderId: "346991840022"
 };
 var db = firebase.initializeApp(config).database();
-var reservationsLogRef = db.ref('reservations');
+var reservationsLogRef = db.ref('reservationsNumOnly');
 Vue.use(VueFire);
 var validTimes = [];
 var flagMain = "";
@@ -313,6 +313,10 @@ var app = new Vue({
                 }
             }
             if (inputDate.length > 1 && flagMain < 1){
+                db.ref("reservations").push({
+                    date: inputDate,
+                    info: [],
+                });
                 reservationsLogRef.push({
                     date: inputDate,
                     info: [],
@@ -443,7 +447,7 @@ var app = new Vue({
             currReservationOutsideAfter = 0;
             
             var requestedSeatingLocation = app.seating.toLowerCase();                        
-            db.ref("reservations/" + flag + "/info/").on("value", function(snapshot) {
+            db.ref("reservationsNumOnly/" + flag + "/info/").on("value", function(snapshot) {
               snapshot.forEach(function(childNodes){
                   
                   var locationOfReservation = childNodes.val().location.toLowerCase();
@@ -509,6 +513,12 @@ var app = new Vue({
             "20fde7aa-c0a4-4289-84e1-859febb782fc",
             function done(message) { return; } 
           );
+          db.ref('reservationsNumOnly/' + flagMain + '/info/').push({
+                name: this.firstname + " " + this.lastName,
+                size: this.size,
+                time : this.timePrint,
+                location: this.seating,
+          });
           db.ref('reservations/' + flagMain + '/info/').push({
                 size: this.size,
                 time : this.timePrint,
@@ -518,7 +528,7 @@ var app = new Vue({
                 email: this.email,
                 accommodations: this.accommodationsPrint
           });
-          db.ref('reservations').once("value")
+          db.ref('reservationsNumOnly').once("value")
               .then(function(snapshot) {
               Email.send("andrewjoliver3@gmail.com",
                 "foh.management.solutions@gmail.com",
