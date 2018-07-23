@@ -612,6 +612,9 @@ hr{
         margin-top: 35vh;
         width: 85%;
     }
+    #timeSelection p{
+        border-radius: 5px;
+    }
 }
 
 /*STYLING FOR MOBILE*/
