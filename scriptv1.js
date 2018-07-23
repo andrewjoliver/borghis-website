@@ -318,8 +318,10 @@ var app = new Vue({
                     info: [],
                 });   
             }
-            for (var w = 0; w < times.length; w++){
-                showValidTime(times[w])
+            if (inputSize < 21){
+                for (var w = 0; w < times.length; w++){
+                    showValidTime(times[w])
+                }
             }
         }
         if (flagMain.length < 1){
