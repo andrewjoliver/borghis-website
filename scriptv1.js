@@ -513,7 +513,7 @@ var app = new Vue({
           $("#confirmationScreen1")[0].style.display = "none";
           $("#confirmationScreen2")[0].style.display = "block";
           Email.send("andrewjoliver3@gmail.com",
-            "ajo14@duke.edu",
+            "borghisbythebay@gmail.com",
             "DELETE ME - Reservation",
             "Party Name: " + this.firstname + " " + this.lastname 
             + '<br/>' + "Date: " + this.datePrint 
