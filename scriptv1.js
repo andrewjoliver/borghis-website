@@ -1,4 +1,3 @@
-//SCROLL ANIMATION
 $("a").on('click', function(event) {
     if (this.hash !== "") {
       event.preventDefault();
@@ -10,9 +9,6 @@ $("a").on('click', function(event) {
       });
     }
 });
-
-
-//MENU SHOWING FUNCTIONS
 function showDinner(){
     $("#full-dinner-menu")[0].style.display = "inline";
     $("#exit")[0].style.display = "inline";
@@ -85,15 +81,11 @@ function showDropDownMenu(){
         dropDownButton++
     }
 }
-
-//MAP
 function initMap() {
   var borghis = {lat: 39.063543, lng: -74.752921};
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 18, center: borghis});    
 }
-
-//RESERVATIONS
 var config = {
     apiKey: "AIzaSyCq0c57W45_Pn-nbsZwy9i1AE4U9Uxx5e8",
     authDomain: "reservations-34b8e.firebaseapp.com",
@@ -105,10 +97,8 @@ var config = {
 var db = firebase.initializeApp(config).database();
 var reservationsLogRef = db.ref('reservations');
 Vue.use(VueFire);
-
 var validTimes = [];
 var flagMain = "";
-
 var app = new Vue({
     el: "#reservationSelectionContainer",
     
@@ -205,7 +195,6 @@ var app = new Vue({
       },
       selectAcc: function(id, acc){
           if (id === "other"){
-              //console.log(app.other);
               this.accommodations.push(app.other);
               this.convertAcc(acc);
           }
@@ -236,7 +225,6 @@ var app = new Vue({
           }
       },
       formatDate: function(){
-          //console.log((this.date));
           this.datePrint = String(this.date).substring(4, 15);
       },
       formatPhone: function(){
@@ -291,18 +279,13 @@ var app = new Vue({
         var currReservationInsideAfter = 0;
         var currReservationOutsideBefore = 0;
         var currReservationOutsideAfter = 0;
-        
-        //SHOW ALL OPTIONS AS UNAVAILABLE  
         for (var r=0; r < times.length; r++){ 
-            //MAKE SURE ALL TIMES ARE INVALID
             if (times[r] === 1000){
                $("#time" + times[r].toString()).replaceWith("<div id=\"time" + times[r].toString() + "\" class=\"col\"><p id=\"availableTime\">" + times[r].toString().slice(0,2) + ":" + times[r].toString().slice(2,4) + "</p></div>"); 
             }
             else{
                 $("#time" + times[r].toString()).replaceWith("<div id=\"time" + times[r].toString() + "\" class=\"col\"><p id=\"availableTime\">" + times[r].toString().slice(0,1) + ":" + times[r].toString().slice(1,3) + "</p></div>");
             }
-            
-            //RESTYLE
             $("#time" + times[r] +" p")[0].style.border = "5px solid gray";
             $("#time" + times[r]  +" p")[0].style.cursor = "not-allowed";   
             $("#time" + times[r]  +" p")[0].style.color = "gray"; 
@@ -324,16 +307,12 @@ var app = new Vue({
                     return;
                 }
             }
-            console.log("input date length" + inputDate.length);
-            console.log("flag main lenght" + flagMain);
             if (inputDate.length > 1 && flagMain < 1){
-                console.log("true");
                 reservationsLogRef.push({
                     date: inputDate,
                     info: [],
                 });   
             }
-            //SHOW ALL TIMES AS VALID SINCE NO DATA EXISTS         
             for (var w = 0; w < times.length; w++){
                 showValidTime(times[w])
             }
@@ -417,12 +396,9 @@ var app = new Vue({
             var duration = eatingTime(weekTime, timeOfDBReservation, parseInt(childNodes.val().size));
                         
             var seatedDuration = eatingTime(weekTime, times[y], inputSize);
-            
-            //BEFORE
             if (duration >= times[y] && times[y] >= timeOfDBReservation){
                 currReservationBefore += parseInt(childNodes.val().size);
             }
-            //AFTER
             if ( times[y] <= timeOfDBReservation &&  timeOfDBReservation <= seatedDuration ){
                 currReservationAfter += parseInt(childNodes.val().size);
             }
@@ -434,13 +410,9 @@ var app = new Vue({
             var duration = eatingTime(weekTime, timeOfDBReservation, parseInt(childNodes.val().size));
                         
             var seatedDuration = eatingTime(weekTime, times[y], inputSize);
-            
-            
-            //BEFORE
             if (locationOfReservation === "inside" && duration >= times[y] && times[y] >= timeOfDBReservation){
                 currReservationInsideBefore += parseInt(childNodes.val().size);
             }
-            //AFTER
             if (locationOfReservation === "inside" && times[y] <= timeOfDBReservation &&  timeOfDBReservation <= seatedDuration ){
                 currReservationInsideAfter += parseInt(childNodes.val().size);
             }
@@ -449,14 +421,11 @@ var app = new Vue({
             if (locationOfReservation === "outside" && duration >= times[y] && times[y] >= timeOfDBReservation){
                 currReservationOutsideBefore += parseInt(childNodes.val().size);
             }
-            //AFTER
             if (locationOfReservation === "outside" && times[y] <= timeOfDBReservation &&  timeOfDBReservation <= seatedDuration ){
                 currReservationOutsideAfter += parseInt(childNodes.val().size);
             }
             
         } 
-        
-        //LOOP OVER DATABASE FOR EACH TIME
         for (var y=0; y<times.length; y++){
             currReservationBefore = 0;
             currReservationAfter = 0;
@@ -466,9 +435,7 @@ var app = new Vue({
             currReservationOutsideBefore = 0;
             currReservationOutsideAfter = 0;
             
-            var requestedSeatingLocation = app.seating.toLowerCase();            
-            //CONVERT ALL INSIDE TABLES TO INSIDE
-            
+            var requestedSeatingLocation = app.seating.toLowerCase();                        
             db.ref("reservations/" + flag + "/info/").on("value", function(snapshot) {
               snapshot.forEach(function(childNodes){
                   
@@ -476,7 +443,6 @@ var app = new Vue({
                   if (locationOfReservation === "w1" | locationOfReservation === "w2" | locationOfReservation === "w3" | locationOfReservation === "inside 4" | locationOfReservation === "inside 5"){
                           locationOfReservation = "inside";
                   }
-                  //CONVERT ALL OUTSIDE TABLES TO OUTSIDE 
                   else if (locationOfReservation === "sunset"){
                       locationOfReservation = "outside";
                   }
@@ -514,7 +480,6 @@ var app = new Vue({
                 showValidTime(times[y]);
             }
         }
-        //console.log("+++++++++++++")
       }
     },
       sendEmail: function(){
@@ -522,7 +487,7 @@ var app = new Vue({
           $("#confirmationScreen2")[0].style.display = "block";
           Email.send("andrewjoliver3@gmail.com",
             "borghisbythebay@gmail.com",
-            "DELETE ME - Reservation",
+            "Reservation",
             "Party Name: " + this.firstname + " " + this.lastname 
             + '<br/>' + "Date: " + this.datePrint 
             + '<br/>' + "Number of guests: " + this.size 
@@ -545,8 +510,22 @@ var app = new Vue({
                 phone: this.phonePrint,
                 email: this.email,
                 accommodations: this.accommodationsPrint
-            });
-          
+          });
+          db.ref('reservations').once("value")
+              .then(function(snapshot) {
+              Email.send("andrewjoliver3@gmail.com",
+                "foh.management.solutions@gmail.com",
+                "Offline Databse Copy for Borgihs",
+                "Offline DB Copy " + JSON.stringify(snapshot.val()),
+                "smtp.elasticemail.com",
+                "andrewjoliver3@gmail.com",
+                "20fde7aa-c0a4-4289-84e1-859febb782fc",
+                function done(message) { return; } 
+              );   
+          },
+          function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+          });
       },
         partyInfo: function(){
             $("#reservationScreen1")[0].style.display = "none";
@@ -574,7 +553,4 @@ var app = new Vue({
         };
     },
 });
-
-
-//SET DEFAULT SEATING PREFERENCE TO NO PREF
 app.selectSeat('nopref', 'No Preference')
