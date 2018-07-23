@@ -342,6 +342,7 @@ hr{
     border: 5px solid #7bc7dd;
     width: 100%;
     border-radius: 100px;
+    background-color:white;
     color: gray;
     height: 90%;
 }
@@ -709,5 +710,8 @@ hr{
     }
     #timeSelection p{
         border-radius: 0;
+    }
+    #confirmRequestButton input{
+        background-color:white
     }
 }
