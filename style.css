@@ -612,9 +612,6 @@ hr{
         margin-top: 35vh;
         width: 85%;
     }
-    #timeSelection p{
-        border-radius: 5px;
-    }
 }
 
 /*STYLING FOR MOBILE*/
@@ -709,5 +706,8 @@ hr{
     #confirmScreen{
         margin: 5%;
         width: 90%;
+    }
+    #timeSelection p{
+        border-radius: 0;
     }
 }
