@@ -319,18 +319,23 @@ var app = new Vue({
             for (var i = 0; i < keys.length; i++){
                 var k = keys[i];
                 if (reservations[k].date === inputDate){
-                    this.flagMain = flag;
                     flag = keys[i];
                     flagMain = flag;
                     return;
                 }
+            }    
+            if (inputDate.length > 1 && flagMain < 1){
+                reservationsLogRef.push({
+                    date: inputDate,
+                    info: [],
+                });   
             }
+            //SHOW ALL TIMES AS VALID SINCE NO DATA EXISTS         
             for (var w = 0; w < times.length; w++){
                 showValidTime(times[w])
-                noData = true;
             }
         }
-        if (noData){
+        if (flagMain.length < 1){
             return;
         }
         function errorData(err){
