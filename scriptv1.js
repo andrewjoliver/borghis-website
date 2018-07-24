@@ -92,18 +92,19 @@ function initMap() {
       document.getElementById('map'), {zoom: 18, center: borghis});    
 }
 var config = {
-    apiKey: "AIzaSyCq0c57W45_Pn-nbsZwy9i1AE4U9Uxx5e8",
-    authDomain: "reservations-34b8e.firebaseapp.com",
-    databaseURL: "https://reservations-34b8e.firebaseio.com",
-    projectId: "reservations-34b8e",
-    storageBucket: "reservations-34b8e.appspot.com",
-    messagingSenderId: "346991840022"
+    apiKey: "AIzaSyCttCzkx_3cmM082eGBsLBwj9kZ9iQLdIM",
+    authDomain: "reservations-log.firebaseapp.com",
+    databaseURL: "https://reservations-log.firebaseio.com",
+    projectId: "reservations-log",
+    storageBucket: "reservations-log.appspot.com",
+    messagingSenderId: "105126362934"
 };
 var db = firebase.initializeApp(config).database();
-var reservationsLogRef = db.ref('reservationsNumOnly');
+var reservationsLogRef = db.ref("reservations");
 Vue.use(VueFire);
 var validTimes = [];
 var flagMain = "";
+var flagFull = "";
 var app = new Vue({
     el: "#reservationSelectionContainer",
     
@@ -275,15 +276,19 @@ var app = new Vue({
         var inputDate = this.datePrint;
         var inputSize = this.size;
         var weekday = String(this.date).slice(0,3);
-        var flag = "";
         var times = [500, 530, 600, 630, 730, 800, 830, 900, 930, 1000]; 
         var noData = false;
+        
         var currReservationBefore = 0;
         var currReservationAfter = 0;
         var currReservationInsideBefore = 0;
         var currReservationInsideAfter = 0;
         var currReservationOutsideBefore = 0;
         var currReservationOutsideAfter = 0;
+          
+        var databaseLocMonth = this.datePrint.substring(0,3).toLowerCase();
+        var databaseLocDay = this.datePrint.substring(0,6).toLowerCase().replace(" ", "-");
+          
         for (var r=0; r < times.length; r++){ 
             if (times[r] === 1000){
                $("#time" + times[r].toString()).replaceWith("<div id=\"time" + times[r].toString() + "\" class=\"col\"><p id=\"availableTime\">" + times[r].toString().slice(0,2) + ":" + times[r].toString().slice(2,4) + "</p></div>"); 
@@ -298,42 +303,7 @@ var app = new Vue({
             $("#time" + times[r]  +" p")[0].style.borderRadius = "100px";
         }
           
-        reservationsLogRef.on('value', getData, errorData);
-
-        function getData(data){
-            var reservations = data.val();
-            var keys = Object.keys(reservations);
-
-            for (var i = 0; i < keys.length; i++){
-                var k = keys[i];
-                if (reservations[k].date === inputDate){
-                    flag = keys[i];
-                    flagMain = flag;
-                    return;
-                }
-            }
-            if (inputDate.length > 1 && flagMain < 1){
-                db.ref("reservations").push({
-                    date: inputDate,
-                    info: [],
-                });
-                reservationsLogRef.push({
-                    date: inputDate,
-                    info: [],
-                });   
-            }
-            if (inputSize < 21){
-                for (var w = 0; w < times.length; w++){
-                    showValidTime(times[w])
-                }
-            }
-        }
-        if (flagMain.length < 1){
-            return;
-        }
-        function errorData(err){
-            console.log(err);
-        }
+          
         function eatingTime(week, time, size){
             var monWed = [130, 145, 145, 200, 215, 215];
             var thuSun = [145, 200, 200, 215, 230, 230];
@@ -437,6 +407,7 @@ var app = new Vue({
             }
             
         } 
+        
         for (var y=0; y<times.length; y++){
             currReservationBefore = 0;
             currReservationAfter = 0;
@@ -446,9 +417,10 @@ var app = new Vue({
             currReservationOutsideBefore = 0;
             currReservationOutsideAfter = 0;
             
-            var requestedSeatingLocation = app.seating.toLowerCase();                        
-            db.ref("reservationsNumOnly/" + flag + "/info/").on("value", function(snapshot) {
-              snapshot.forEach(function(childNodes){
+            var dbLocation = "reservations/" + databaseLocMonth + "/" + databaseLocDay + "/reservationsShort/";
+            var requestedSeatingLocation = app.seating.toLowerCase();
+            db.ref(dbLocation).on("value", function(snapshot) {
+                snapshot.forEach(function(childNodes){
                   
                   var locationOfReservation = childNodes.val().location.toLowerCase();
                   if (locationOfReservation === "w1" | locationOfReservation === "w2" | locationOfReservation === "w3" | locationOfReservation === "inside 4" | locationOfReservation === "inside 5"){
@@ -475,6 +447,7 @@ var app = new Vue({
                       }
                   }
               });
+              
           },
         function (errorObject) {
                   console.log("The read failed: " + errorObject.code);
@@ -496,6 +469,13 @@ var app = new Vue({
       sendEmail: function(){
           $("#confirmationScreen1")[0].style.display = "none";
           $("#confirmationScreen2")[0].style.display = "block";
+          
+          var databaseLocMonth = this.datePrint.substring(0,3).toLowerCase();
+          var databaseLocDay = this.datePrint.substring(0,6).toLowerCase().replace(" ", "-");
+          var dbLocationShort = "reservations/" + databaseLocMonth + "/" + databaseLocDay + "/reservationsShort/";
+          var dbLocationFull = "reservations/" + databaseLocMonth + "/" + databaseLocDay + "/reservationsFull/";
+          
+          
           Email.send("andrewjoliver3@gmail.com",
             "borghisbythebay@gmail.com",
             "Reservation",
@@ -513,13 +493,9 @@ var app = new Vue({
             "20fde7aa-c0a4-4289-84e1-859febb782fc",
             function done(message) { return; } 
           );
-          db.ref('reservationsNumOnly/' + flagMain + '/info/').push({
-                name: this.firstname + " " + this.lastName,
-                size: this.size,
-                time : this.timePrint,
-                location: this.seating,
-          });
-          db.ref('reservations/' + flagMain + '/info/').push({
+          
+          
+          db.ref(dbLocationFull).push({
                 size: this.size,
                 time : this.timePrint,
                 location: this.seating,
@@ -528,21 +504,11 @@ var app = new Vue({
                 email: this.email,
                 accommodations: this.accommodationsPrint
           });
-          db.ref('reservationsNumOnly').once("value")
-              .then(function(snapshot) {
-              Email.send("andrewjoliver3@gmail.com",
-                "foh.management.solutions@gmail.com",
-                "Offline Databse Copy for Borgihs",
-                "Offline DB Copy " + JSON.stringify(snapshot.val()),
-                "smtp.elasticemail.com",
-                "andrewjoliver3@gmail.com",
-                "20fde7aa-c0a4-4289-84e1-859febb782fc",
-                function done(message) { return; } 
-              );   
-          },
-          function (errorObject) {
-              console.log("The read failed: " + errorObject.code);
-          });
+          db.ref(dbLocationShort).push({
+                size: this.size,
+                time : this.timePrint,
+                location: this.seating,
+          });          
       },
         partyInfo: function(){
             $("#reservationScreen1")[0].style.display = "none";
