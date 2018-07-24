@@ -102,6 +102,8 @@ var config = {
 var db = firebase.initializeApp(config).database();
 var reservationsLogRef = db.ref("reservations");
 Vue.use(VueFire);
+Vue.config.devtools = false;
+Vue.config.productionTip = false;
 var validTimes = [];
 var flagMain = "";
 var flagFull = "";
@@ -537,5 +539,3 @@ var app = new Vue({
     },
 });
 app.selectSeat('nopref', 'No Preference')
-Vue.config.devtools = false;
-Vue.config.productionTip = false;
