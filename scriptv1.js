@@ -92,12 +92,12 @@ function initMap() {
       document.getElementById('map'), {zoom: 18, center: borghis});    
 }
 var config = {
-    apiKey: "AIzaSyCttCzkx_3cmM082eGBsLBwj9kZ9iQLdIM",
-    authDomain: "reservations-log.firebaseapp.com",
-    databaseURL: "https://reservations-log.firebaseio.com",
-    projectId: "reservations-log",
-    storageBucket: "reservations-log.appspot.com",
-    messagingSenderId: "105126362934"
+    apiKey: "AIzaSyCq0c57W45_Pn-nbsZwy9i1AE4U9Uxx5e8",
+    authDomain: "reservations-34b8e.firebaseapp.com",
+    databaseURL: "https://reservations-34b8e.firebaseio.com",
+    projectId: "reservations-34b8e",
+    storageBucket: "reservations-34b8e.appspot.com",
+    messagingSenderId: "346991840022"
 };
 var db = firebase.initializeApp(config).database();
 var reservationsLogRef = db.ref("reservations");
@@ -523,7 +523,14 @@ var app = new Vue({
             $("#placeholderCol")[0].style.display = "none";
             $("#backArrow2")[0].style.display = "none";
             $("#reservationScreen2")[0].style.display = "inline";
-            $("#backArrow1")[0].style.display = "block";   
+            $("#backArrow1")[0].style.display = "block";
+            try {
+              $("#confirmationScreen2").style.display="none";
+            }
+            catch(error) {
+                //DO NOTHING
+            }
+
         },
         timingInfo: function(){
             $("#reservationScreen1")[0].style.display = "block";

@@ -41,7 +41,8 @@ hr{
 }
 #header p{
     color: white;
-    font-size: 130% 
+    font-size: 100%;
+    margin: 1%;
 }
 #addressListed{
     margin-top: 1%;
