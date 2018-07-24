@@ -100,7 +100,7 @@ var config = {
     messagingSenderId: "346991840022"
 };
 var db = firebase.initializeApp(config).database();
-var reservationsLogRef = db.ref("reservations");
+
 Vue.use(VueFire);
 Vue.config.devtools = false;
 Vue.config.productionTip = false;
@@ -419,7 +419,8 @@ var app = new Vue({
             currReservationOutsideBefore = 0;
             currReservationOutsideAfter = 0;
             
-            var dbLocation = "reservations/" + databaseLocMonth + "/" + databaseLocDay + "/reservationsShort/";
+            var dbLocation = databaseLocMonth + "/" + databaseLocDay + "/reservationsShort/";
+            console.log(dbLocation);
             var requestedSeatingLocation = app.seating.toLowerCase();
             db.ref(dbLocation).on("value", function(snapshot) {
                 snapshot.forEach(function(childNodes){
@@ -474,8 +475,8 @@ var app = new Vue({
           
           var databaseLocMonth = this.datePrint.substring(0,3).toLowerCase();
           var databaseLocDay = this.datePrint.substring(0,6).toLowerCase().replace(" ", "-");
-          var dbLocationShort = "reservations/" + databaseLocMonth + "/" + databaseLocDay + "/reservationsShort/";
-          var dbLocationFull = "reservations/" + databaseLocMonth + "/" + databaseLocDay + "/reservationsFull/";
+          var dbLocationShort = databaseLocMonth + "/" + databaseLocDay + "/reservationsShort/";
+          var dbLocationFull = databaseLocMonth + "/" + databaseLocDay + "/reservationsFull/";
           
           
           Email.send("andrewjoliver3@gmail.com",
@@ -538,11 +539,6 @@ var app = new Vue({
             $("#reservationScreen2")[0].style.display = "none";
             $("#backArrow1")[0].style.display = "none";
         },
-  },
-    firebase() {
-        return {
-            reservationsLog:  reservationsLogRef,
-        };
-    },
+  }
 });
 app.selectSeat('nopref', 'No Preference')
