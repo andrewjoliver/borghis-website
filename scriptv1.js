@@ -44,6 +44,7 @@ function navbarColor(num){
 window.onload = function() {
     initMap();
     myFunction();
+    app.selectSeat('nopref', 'No Preference');
 }
 window.onscroll = function() {myFunction()};
 function myFunction(num) {
@@ -549,4 +550,3 @@ var app = new Vue({
         },
   }
 });
-app.selectSeat('nopref', 'No Preference')
