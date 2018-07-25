@@ -290,7 +290,7 @@ var app = new Vue({
           
         var databaseLocMonth = this.datePrint.substring(0,3).toLowerCase();
         var databaseLocDay = this.datePrint.substring(0,6).toLowerCase().replace(" ", "-");
-          
+
         for (var r=0; r < times.length; r++){ 
             if (times[r] === 1000){
                $("#time" + times[r].toString()).replaceWith("<div id=\"time" + times[r].toString() + "\" class=\"col\"><p id=\"availableTime\">" + times[r].toString().slice(0,2) + ":" + times[r].toString().slice(2,4) + "</p></div>"); 
@@ -491,6 +491,12 @@ var app = new Vue({
             + '<br/>' + "Phone Number: " + this.phonePrint 
             + '<br/>' + "Email: " + this.email 
             + '<br/>' + "------------------",
+            {
+                "token" : "6d67c589-b0dc-4127-9008-9d1e917e2cc5",
+                "callback": function done(message){
+                    console.log(message)
+                }
+            }
             "smtp.elasticemail.com",
             "andrewjoliver3@gmail.com",
             "20fde7aa-c0a4-4289-84e1-859febb782fc",
