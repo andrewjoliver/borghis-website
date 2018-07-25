@@ -458,7 +458,7 @@ var app = new Vue({
         function (errorObject) {
                   console.log("The read failed: " + errorObject.code);
         }); 
-            
+        console.log(currReservationBefore + " " + requestedSeatingLocation);
         if (requestedSeatingLocation !== "no preference" && currReservationBefore + parseInt(inputSize) < 21 && + currReservationAfter + parseInt(inputSize) < 21){
             showValidTime(times[y]);
         }
