@@ -497,7 +497,7 @@ var app = new Vue({
             {
                 "token" : "6d67c589-b0dc-4127-9008-9d1e917e2cc5",
                 "callback": function done(message){
-                    console.log(message)
+                    //console.log(message)
                 }
             }
           );
