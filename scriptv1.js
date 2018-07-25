@@ -43,6 +43,7 @@ function navbarColor(num){
 }
 window.onscroll = function() {myFunction()};
 function myFunction(num) {
+    if (document.readyState !== "complete"){return;}
     var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     var scrolled = (winScroll / height) * 100;
@@ -87,6 +88,7 @@ function showDropDownMenu(){
     }
 }
 function initMap() {
+  if (document.readyState !== "complete"){return;}
   var borghis = {lat: 39.063543, lng: -74.752921};
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 18, center: borghis});    
@@ -497,10 +499,6 @@ var app = new Vue({
                     console.log(message)
                 }
             }
-            "smtp.elasticemail.com",
-            "andrewjoliver3@gmail.com",
-            "20fde7aa-c0a4-4289-84e1-859febb782fc",
-            function done(message) { return; } 
           );
           
           
