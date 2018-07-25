@@ -424,7 +424,7 @@ var app = new Vue({
             var dbLocation = databaseLocMonth + "/" + databaseLocDay + "/reservationsShort/";
             
             var requestedSeatingLocation = app.seating.toLowerCase();
-            db.ref(dbLocation).on("value", function(snapshot) {
+            db.ref(dbLocation).once("value", function(snapshot) {
                 snapshot.forEach(function(childNodes){
                   
                   var locationOfReservation = childNodes.val().location.toLowerCase();
