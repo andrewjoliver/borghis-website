@@ -41,7 +41,10 @@ function navbarColor(num){
     
     $("#hamburgerLocation").replaceWith("<p id='hamburgerLocation'>" + menuLocation[num] + "</p>");
 }
-window.onload = function() {myFunction()};
+window.onload = function() {
+    initMap();
+    myFunction();
+}
 window.onscroll = function() {myFunction()};
 function myFunction(num) {
     if (document.readyState !== "complete"){return;}
