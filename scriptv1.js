@@ -275,34 +275,31 @@ var app = new Vue({
           $("#time" + time.toString() +" p")[0].style.color = "#000";
       },
       checkAvailability: function(){
-        
+
         if (this.date.length < 1 || this.size.length < 1 || this.seating.length < 1){
             return;
         }  
-        
+
         validTimes = [];  
-          
         var inputDate = this.datePrint;
         var inputSize = this.size;
         var weekday = String(this.date).slice(0,3);
         var times = [500, 530, 600, 630, 730, 800, 830, 900, 930, 1000]; 
-        var noData = false;
-        
+        var databaseLocMonth = this.datePrint.substring(0,3).toLowerCase();
+        var databaseLocDay = this.datePrint.substring(0,6).toLowerCase().replace(" ", "-");
         var currReservationBefore = 0;
         var currReservationAfter = 0;
         var currReservationInsideBefore = 0;
         var currReservationInsideAfter = 0;
         var currReservationOutsideBefore = 0;
         var currReservationOutsideAfter = 0;
-          
-        var databaseLocMonth = this.datePrint.substring(0,3).toLowerCase();
-        var databaseLocDay = this.datePrint.substring(0,6).toLowerCase().replace(" ", "-");
 
         for (var r=0; r < times.length; r++){ 
             if (times[r] === 1000){
                $("#time" + times[r].toString()).replaceWith("<div id=\"time" + times[r].toString() + "\" class=\"col\"><p id=\"availableTime\">" + times[r].toString().slice(0,2) + ":" + times[r].toString().slice(2,4) + "</p></div>"); 
             }
             else{
+
                 $("#time" + times[r].toString()).replaceWith("<div id=\"time" + times[r].toString() + "\" class=\"col\"><p id=\"availableTime\">" + times[r].toString().slice(0,1) + ":" + times[r].toString().slice(1,3) + "</p></div>");
             }
             $("#time" + times[r] +" p")[0].style.border = "5px solid gray";
@@ -311,12 +308,9 @@ var app = new Vue({
             $("#time" + times[r]  +" p")[0].style.backgroundColor = "gray"; 
             $("#time" + times[r]  +" p")[0].style.borderRadius = "100px";
         }
-          
-          
         function eatingTime(week, time, size){
             var monWed = [130, 145, 145, 200, 215, 215];
             var thuSun = [145, 200, 200, 215, 230, 230];
-                        
             if (week === "monWed"){
                 if (size < 4){
                     return formatNumToHour(time+monWed[0]);
@@ -367,114 +361,214 @@ var app = new Vue({
             return hour+min;
         }
         function showValidTime(time){
+
             if (time === 1000){
+
                $("#time" + time.toString()).replaceWith("<div id=\"time" + time.toString() + "\" class=\"col\"><p onclick=\"app.selectTime(\'" + time.toString() + "\')\" id=\"availableTime\">" + time.toString().slice(0,2) + ":" + time.toString().slice(2,4) + "</p></div>"); 
+
             }
+
             else{
+
                 $("#time" + time.toString()).replaceWith("<div id=\"time" + time.toString() + "\" class=\"col\"><p onclick=\"app.selectTime(\'" + time.toString() + "\')\" id=\"availableTime\">" + time.toString().slice(0,1) + ":" + time.toString().slice(1,3) + "</p></div>");
+
             }
+
             this.validTimes.push(time);
+
             
+
             $("#time" + time.toString() +" p")[0].style.border = "5px solid #7bc7dd";
+
             $("#time" + time.toString() +" p")[0].style.backgroundColor = "white";
+
             $("#time" + time.toString() +" p")[0].style.borderRadius = "100px";
+
         }   
-        function countReservations(weekTime, childNodes, times, inputSize){
-            
+
+        function countReservations(weekTime, childNodes, times, inputSize){ 
+
             var timeOfDBReservation = parseInt(childNodes.val().time.replace(":", "").replace(" PM", "").replace(" ", "").trim());
+
             
+
             var duration = eatingTime(weekTime, timeOfDBReservation, parseInt(childNodes.val().size));
+
                         
+
             var seatedDuration = eatingTime(weekTime, times[y], inputSize);
+
             if (duration >= times[y] && times[y] >= timeOfDBReservation){
+
                 currReservationBefore += parseInt(childNodes.val().size);
+
             }
+
             if ( times[y] <= timeOfDBReservation &&  timeOfDBReservation <= seatedDuration ){
+
                 currReservationAfter += parseInt(childNodes.val().size);
+
             }
+
         }
+
         function countReservationsNoPref(weekTime, childNodes, times, inputSize, locationOfReservation){
+
             
+
             var timeOfDBReservation = parseInt(childNodes.val().time.replace(":", "").replace(" PM", "").replace(" ", "").trim());
+
             
+
             var duration = eatingTime(weekTime, timeOfDBReservation, parseInt(childNodes.val().size));
+
                         
+
             var seatedDuration = eatingTime(weekTime, times[y], inputSize);
+
             if (locationOfReservation === "inside" && duration >= times[y] && times[y] >= timeOfDBReservation){
+
                 currReservationInsideBefore += parseInt(childNodes.val().size);
+
             }
+
             if (locationOfReservation === "inside" && times[y] <= timeOfDBReservation &&  timeOfDBReservation <= seatedDuration ){
+
                 currReservationInsideAfter += parseInt(childNodes.val().size);
+
             }
+
             
+
             
+
             if (locationOfReservation === "outside" && duration >= times[y] && times[y] >= timeOfDBReservation){
+
                 currReservationOutsideBefore += parseInt(childNodes.val().size);
+
             }
+
             if (locationOfReservation === "outside" && times[y] <= timeOfDBReservation &&  timeOfDBReservation <= seatedDuration ){
+
                 currReservationOutsideAfter += parseInt(childNodes.val().size);
+
             }
+
             
+
         } 
-        
+
         for (var y=0; y<times.length; y++){
+
             currReservationBefore = 0;
+
             currReservationAfter = 0;
+
             
+
             currReservationInsideBefore = 0;
+
             currReservationInsideAfter = 0;
+
             currReservationOutsideBefore = 0;
+
             currReservationOutsideAfter = 0;
+
             
-            var dbLocation = databaseLocMonth + "/" + databaseLocDay + "/reservationsShort/";
-            
+
             var requestedSeatingLocation = app.seating.toLowerCase();
-            db.ref(dbLocation).once("value", function(snapshot) {
-                snapshot.forEach(function(childNodes){
+            var dbLocation = databaseLocMonth + "/" + databaseLocDay + "/reservationsShort/";                        
+
+            db.ref(dbLocation).on("value", function(snapshot) {
+
+              snapshot.forEach(function(childNodes){
+
                   
+
                   var locationOfReservation = childNodes.val().location.toLowerCase();
+
                   if (locationOfReservation === "w1" | locationOfReservation === "w2" | locationOfReservation === "w3" | locationOfReservation === "inside 4" | locationOfReservation === "inside 5"){
+
                           locationOfReservation = "inside";
+
                   }
+
                   else if (locationOfReservation === "sunset"){
+
                       locationOfReservation = "outside";
+
                   }
+
+
 
                   if (locationOfReservation === requestedSeatingLocation){
+
                       if (weekday === "Mon" || weekday === "Tue" || weekday === "Wed"){
+
                           countReservations("monWed", childNodes, times, inputSize)
+
                       }
+
                       else{
+
                           countReservations("thursSun", childNodes, times, inputSize)
+
                       }
+
                   }
+
                   else if (requestedSeatingLocation === "no preference"){
+
                       if (weekday === "Mon" || weekday === "Tue" || weekday === "Wed"){
+
                           countReservationsNoPref("monWed", childNodes, times, inputSize, locationOfReservation)
+
                       }
+
                       else{
+
                           countReservationsNoPref("thursSun", childNodes, times, inputSize, locationOfReservation)
+
                       }
+
                   }
+
               });
-              
+
           },
+
         function (errorObject) {
+
                   console.log("The read failed: " + errorObject.code);
+
         }); 
-        console.log(currReservationBefore + " " + requestedSeatingLocation);
+
+            
+
         if (requestedSeatingLocation !== "no preference" && currReservationBefore + parseInt(inputSize) < 21 && + currReservationAfter + parseInt(inputSize) < 21){
+
             showValidTime(times[y]);
+
         }
+
         else if (requestedSeatingLocation === "no preference"){
+
             var roomOutside = (currReservationOutsideAfter + parseInt(inputSize) < 21 && currReservationOutsideBefore + parseInt(inputSize) < 21);
+
             var roomInside = (currReservationInsideAfter + parseInt(inputSize) < 21 && currReservationInsideBefore + parseInt(inputSize) < 21);
 
+
+
             if (roomOutside  || roomInside ){
+
                 showValidTime(times[y]);
+
             }
+
         }
+
       }
+
     },
       sendEmail: function(){
           $("#confirmationScreen1")[0].style.display = "none";
@@ -508,7 +602,7 @@ var app = new Vue({
           
           
           db.ref(dbLocationFull).push({
-                size: this.size,
+                size: parseInt(this.size),
                 time : this.timePrint,
                 location: this.seating,
                 name: this.firstname + " " + this.lastname,
@@ -517,32 +611,32 @@ var app = new Vue({
                 accommodations: this.accommodationsPrint
           });
           db.ref(dbLocationShort).push({
-                size: this.size,
+                size: parseInt(this.size),
                 time : this.timePrint,
                 location: this.seating,
           });          
       },
-        partyInfo: function(){
-            $("#reservationScreen1")[0].style.display = "none";
-            $("#placeholderCol")[0].style.display = "none";
-            $("#reservationScreen2")[0].style.display = "block";
-            $("#backArrow1")[0].style.display = "block";            
-        },
-        partyInfoBack: function(){
-            $("#confirmScreen")[0].style.display = "none";
-            $("#placeholderCol")[0].style.display = "none";
-            $("#backArrow2")[0].style.display = "none";
-            $("#reservationScreen2")[0].style.display = "inline";
-            $("#backArrow1")[0].style.display = "block";
-            try {
-              $("#confirmationScreen2").style.display="none";
-            }
-            catch(error) {
-                //DO NOTHING
-            }
+      partyInfo: function(){
+        $("#reservationScreen1")[0].style.display = "none";
+        $("#placeholderCol")[0].style.display = "none";
+        $("#reservationScreen2")[0].style.display = "block";
+        $("#backArrow1")[0].style.display = "block";            
+    },
+      partyInfoBack: function(){
+        $("#confirmScreen")[0].style.display = "none";
+        $("#placeholderCol")[0].style.display = "none";
+        $("#backArrow2")[0].style.display = "none";
+        $("#reservationScreen2")[0].style.display = "inline";
+        $("#backArrow1")[0].style.display = "block";
+        try {
+          $("#confirmationScreen2").style.display="none";
+        }
+        catch(error) {
+            //DO NOTHING
+        }
 
-        },
-        timingInfo: function(){
+    },
+      timingInfo: function(){
             $("#reservationScreen1")[0].style.display = "block";
             $("#placeholderCol")[0].style.display = "block";
             $("#reservationScreen2")[0].style.display = "none";
