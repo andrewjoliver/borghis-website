@@ -280,13 +280,27 @@
         </div>
         <div id="reservationContainerScreen" class="container">
             
+            <div id="errorScreen">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-2 col-md-3"></div>
+                        <div class="col-8 col-md-6">
+                            <p>Oops! Something went wrong.</p>
+                            <p>Please call us at (609) 961-3899 to make a reservation.</p>
+                            <p>We apologize for any inconvenience!</p>
+                        </div>
+                        <div class="col-2 col-md-3"></div>
+                    </div>
+                </div>
+            </div>
+            
             <div id="reservationScreen1">
                 <div class="container">
                     <div class="row">
                         <div id="datePickerContainer" class="col-12 col-md-6 col">
-                            <vuejs-datepicker @closed="closedDateSelection()" id="datePicker" placeholder="Select Date" v-model="date"></vuejs-datepicker>  
+                            <vuejs-datepicker :bootstrap-styling="false" @closed="closedDateSelection()" id="datePicker" placeholder="Select Date" v-model="date"></vuejs-datepicker>  
                         </div>
-                        <div class="col-12 col-md-6 col">
+                        <div id="sizeContainer" class="col-12 col-md-6 col">
                             <input id="size" onblur="app.checkAvailability()" placeholder="Party Size" type="text" v-model="size">
                         </div>
                     </div>

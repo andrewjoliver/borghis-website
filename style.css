@@ -312,7 +312,7 @@ hr{
     height: auto;
 }
 #datePicker{
-    padding: 2%;
+    padding: 3.2%;
     cursor: pointer;
 }
 #datePicker:hover{
@@ -466,6 +466,18 @@ hr{
 #inputButton input{
     background-color: white;
 }
+#errorScreen{
+    text-align: center;
+}
+#errorScreen .col-8{
+    display: none;
+    border: 5px solid #7bc7dd;
+    border-radius: 100px;
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.5), 0 30px 60px 0 rgba(0, 0, 0, 0.4);
+    margin-bottom: 15%;
+    margin-top: 5%;
+}
+
 
 /* FAQ Styling */
 #faqs{
