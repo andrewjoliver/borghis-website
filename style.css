@@ -536,8 +536,12 @@ hr{
 
 
 /*LOCATION AND CONTACT STYLE*/
+#infoContainerclass{
+    margin-left: 25%;
+}
 #location{
     text-align: center;
+    width: 100%;
 }
 #location img{
     padding: 5%;
@@ -570,6 +574,7 @@ hr{
     color: #7bc7dd;
     font-size: 90%;
 }
+/*
 #mapContainer p span{
     padding: 2%;
     padding-right: 6%;
@@ -588,6 +593,7 @@ hr{
     padding-right: 3%;
     padding-left: 3%;
 }
+*/
 
 /*RESIZING FOR MEDIUM SCREENS*/
 @media (max-width: 1020px){
