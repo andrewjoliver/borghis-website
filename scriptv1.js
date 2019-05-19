@@ -50,7 +50,7 @@ function navbarColor(num){
 window.onload = function() {
     initMap();
     myFunction();
-    app.selectSeat('nopref', 'No Preference');
+    // app.selectSeat('nopref', 'No Preference');
 }
 window.onscroll = function() {myFunction()};
 function myFunction(num) {
@@ -104,16 +104,17 @@ function initMap() {
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 18, center: borghis});    
 }
-var config = {
-    apiKey: "AIzaSyCq0c57W45_Pn-nbsZwy9i1AE4U9Uxx5e8",
-    authDomain: "reservations-34b8e.firebaseapp.com",
-    databaseURL: "https://reservations-34b8e.firebaseio.com",
-    projectId: "reservations-34b8e",
-    storageBucket: "reservations-34b8e.appspot.com",
-    messagingSenderId: "346991840022"
-};
-var db = firebase.initializeApp(config).database();
+//var config = {
+//    apiKey: "AIzaSyCq0c57W45_Pn-nbsZwy9i1AE4U9Uxx5e8",
+//    authDomain: "reservations-34b8e.firebaseapp.com",
+//    databaseURL: "https://reservations-34b8e.firebaseio.com",
+//    projectId: "reservations-34b8e",
+//    storageBucket: "reservations-34b8e.appspot.com",
+//    messagingSenderId: "346991840022"
+//};
+//var db = firebase.initializeApp(config).database();
 
+/**
 Vue.use(VueFire);
 Vue.config.devtools = false;
 Vue.config.productionTip = false;
@@ -606,32 +607,31 @@ var app = new Vue({
             }
           );
           
-          /*  
-          TODO: IMPLEMENT AUTOMATIC CONFIRMATION
-          Email.send("andrewjoliver3@gmail.com",
-            this.email,
-            "Reservation Confirmation",
-            "Hello " + this.name + "," 
-            + '\n\n' + "This is an automated reminder and confirmation for your reservation at Borghi's By the Bay, with the following party information." 
-            + '\n\n' + "Party Name: " + this.name 
-            + '\n' + "Date: " + this.shownDate 
-            + '\n' + "Number of guests: " + this.size 
-            + '\n' + "Time: " + this.time 
-            + '\n' + "Seating Preference: " + this.location 
-            + '\n' + "Party Accommodations: " + this.accommodations 
-            + '\n' + "Phone Number: " + this.phone 
-            + '\n\n' + "Please call our restaurant at 609-961-3899 if any of the above information is incorrect or changes. Please note that we hold reservations for a maximum of 15 minutes. Thank you for your reservation! We look forward to seeing you soon." 
-            + '\n\n' + "Thank you,"
-            + '\n' + "Borghi's By the Bay",
-            {
-                "token" : "6d67c589-b0dc-4127-9008-9d1e917e2cc5",
-                "callback": function done(message){
-                    //console.log(message)
-                }
-            }
-          );
+            
+//          TODO: IMPLEMENT AUTOMATIC CONFIRMATION
+//          Email.send("andrewjoliver3@gmail.com",
+//            this.email,
+//            "Reservation Confirmation",
+//            "Hello " + this.name + "," 
+//            + '\n\n' + "This is an automated reminder and confirmation for your reservation at Borghi's By the Bay, with the following party information." 
+//            + '\n\n' + "Party Name: " + this.name 
+//            + '\n' + "Date: " + this.shownDate 
+//            + '\n' + "Number of guests: " + this.size 
+//            + '\n' + "Time: " + this.time 
+//            + '\n' + "Seating Preference: " + this.location 
+//            + '\n' + "Party Accommodations: " + this.accommodations 
+//            + '\n' + "Phone Number: " + this.phone 
+//            + '\n\n' + "Please call our restaurant at 609-961-3899 if any of the above information is incorrect or changes. Please note that we hold reservations for a maximum of 15 minutes. Thank you for your reservation! We look forward to seeing you soon." 
+//            + '\n\n' + "Thank you,"
+//            + '\n' + "Borghi's By the Bay",
+//            {
+//                "token" : "6d67c589-b0dc-4127-9008-9d1e917e2cc5",
+//                "callback": function done(message){
+//                    //console.log(message)
+//                }
+//            }
+//          );
           
-          */
           
           db.ref(dbLocationFull).push({
                 size: parseInt(this.size),
@@ -676,3 +676,4 @@ var app = new Vue({
         },
   }
 });
+**/
