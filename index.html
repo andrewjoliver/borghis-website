@@ -58,11 +58,11 @@
                 <div class="col-md">
                     <a onclick="javascript:showDropDownMenu()" href="#reviewsJump">Reviews</a>
                 </div>
-                <!--
+                
                 <div class="col-md">
                     <a onclick="javascript:showDropDownMenu()" href="#reservationsJump">Reservations</a>
                 </div>
-                -->
+                
                 <div class="col-md">
                     <a onclick="javascript:showDropDownMenu()" href="#storyJump">Our Story</a>
                 </div>
@@ -89,13 +89,9 @@
         
         <img id="name" src="photos/logos.png">
         <div id="address">
-<!--
-            <p id="addressListed">8128 Third Avenue Stone Harbor, NJ</p>
-            <p id="phoneNumberListed">(609) 961-3899</p>
--->
             <p><b>We open for the 2019 Season on Easter Weekend!</b></p>
             <p><b>Open for weekends until Memorial Day. Open daily Memorial Day through Labor Day</b></p>
-            <p>| Dinner: 4 PM - 9 PM | Breakfast: 8 AM - 12:00 PM |</p>
+            <p>| Dinner: 5 PM - 9 PM | Breakfast: 8 AM - 12:00 PM |</p>
             <p id="addressListed">8128 Third Avenue Stone Harbor, NJ | (609) 961-3899</p>
         </div>
         
@@ -113,6 +109,9 @@
         <div id="full-dinner-menu">
             <img src="photos/full-dinner-menu.jpg">
         </div>
+        <div id="full-dessert-menu">
+            <img src="photos/full-dessert-menu.jpg">
+        </div>
         
         <div id="exit">
             <img onclick="javascript:exitMenu()" src="photos/exit-logo.png">
@@ -123,6 +122,7 @@
         </a>
         
         
+<!--
         <div id="foodMenuIcons">
             <div id="foodPhotos">
                 <div class="container">
@@ -144,21 +144,25 @@
                     </div>
                 </div>    
             </div>
+-->
             
             <div id="menuIcons">
                 <div class="container">
                     <div class="row">
-                        <div class="col">
+                        <div class="col align-self-center">
                             <img onclick="javascript:showBreakfast()" src="photos/breakfast-menu-icon.png">
                         </div>
-                        <div class="col">
+                        <div class="col align-self-center">
                             <img onclick="javascript:showDinner()" src="photos/dinner-menu-icon.png">
+                        </div>
+                        <div class="col align-self-center">
+                            <img onclick="javascript:showDessert()" src="photos/dessert-menu-icon.png">
                         </div>
                     </div>
                 </div>
+                <br>
             </div>
         </div>
-    </div>
     
     <a id="reviewsJump"><hr></a>
     
@@ -215,208 +219,24 @@
         
     </div>
     
-    <!--
+    
     <a id="reservationsJump"><hr></a>
     
     <div id="reservationSelectionContainer">
         <div id="reservationsHeader">
             <div class="row">
-                <div id="placeholderCol" class="col-2 col-md-3">
-                </div>
-                <div id="backArrow1" class="col-2 col-md-3">
-                    <h1 @click="timingInfo">&#8678;</h1>
-                </div>
-                <div id="backArrow2" class="col-2 col-md-3">
-                    <h1 @click="partyInfoBack">&#8678;</h1>
-                </div>
-                <div class="col-8 col-md-6 align-self-center">
-                    <h1>Reservations</h1>
-                </div>
-                <div class="col-2 col-md-3"></div>
-            </div>
-        </div>
-        <div id="confirmScreen">
-            <div class="container-fluid">
-                <div id="confirmationScreen1">
-                    <div class="row">
-                        <div class="col">
-                            <h6>Please ensure all of the below information is correct.</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h6><u>Name:</u> {{firstname}} {{lastname}}</h6>
-                        </div>
-                        <div class="col">
-                            <h6><u>Seated:</u> {{seating}}</h6>
-                        </div>
-                        <div class="col">
-                            <h6><u>Date:</u> {{datePrint}}</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h6><u>Phone Number:</u> {{phonePrint}}</h6>
-                        </div>
-                        <div class="col">
-                            <h6><u>Accomodations:</u> {{accommodationsPrint}} {{other}}</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h6><u>Time:</u> {{timePrint}} PM</h6>
-                        </div>
-                        <div class="col">
-                            <h6><u>Party Size:</u> {{size}}</h6>
-                        </div>
-                        <div class="col">
-                            <h6><u>Email:</u> {{email}}</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div id="confirmRequestButton" class="col-8">
-                            <input type="submit" value="Confirm and Request" @click="sendEmail()">  
-                        </div>
-                        <div class="col-2"></div>
-                    </div>
-                </div>
-                <div id="confirmationScreen2">
-                    <h2><i>Thank you for requesting a reservation! Please note that your reservation is <b>not</b> confirmed. A staff member will call you within 24 hours to confirm your reservation. Feel free to give us a call at (609) 961-3899 with any questions.</i></h2>
-                </div>
-            </div>
-        </div>
-        <div id="reservationContainerScreen" class="container">
-            
-            <div id="errorScreen">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-2 col-md-3"></div>
-                        <div class="col-8 col-md-6">
-                            <p>Oops! Something went wrong.</p>
-                            <p>Please call us at (609) 961-3899 to make a reservation.</p>
-                            <p>We apologize for any inconvenience!</p>
-                        </div>
-                        <div class="col-2 col-md-3"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="reservationScreen1">
-                <div class="container">
-                    <div class="row">
-                        <div id="datePickerContainer" class="col-12 col-md-6 col">
-                            <vuejs-datepicker :bootstrap-styling="false" @closed="closedDateSelection()" id="datePicker" placeholder="Select Date" v-model="date"></vuejs-datepicker>  
-                        </div>
-                        <div id="sizeContainer" class="col-12 col-md-6 col">
-                            <input id="size" onblur="app.checkAvailability()" placeholder="Party Size" type="text" v-model="size">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p id="inside" @click="selectSeat('inside', 'Inside')">Seated Inside</p>
-                        </div>
-                        <div class="col">
-                            <p id="outside" @click="selectSeat('outside', 'Outside')">Seated Outside</p>
-                        </div>
-                        <div class="col">
-                            <p id="nopref" @click="selectSeat('nopref', 'No Preference')">No Preference</p>
-                        </div>
-                    </div>
-                    <div class="row">                
-                        <div class="col-12">
-                            <div id="timeSelection" class="container">
-                                <div class="row">
-                                    <div id="time500" class="col">
-                                        <p>5:00</p>
-                                    </div>
-                                    <div id="time530" class="col">
-                                        <p>5:30</p>
-                                    </div>
-                                    <div id="time600" class="col">
-                                        <p>6:00</p>
-                                    </div>
-                                    <div id="time630" class="col">
-                                        <p>6:30</p>
-                                    </div>
-                                    <div id="time730" class="col">
-                                        <p>7:30</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div id="time800" class="col">
-                                        <p>8:00</p>
-                                    </div>
-                                    <div id="time830" class="col">
-                                        <p>8:30</p>
-                                    </div>
-                                    <div id="time900" class="col">
-                                        <p>9:00</p>
-                                    </div>
-                                    <div id="time930" class="col">
-                                        <p>9:30</p>
-                                    </div>
-                                    <div id="time1000" class="col">
-                                        <p>10:00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    <div id="button">
-                        <div class="row">
-                            <div class="col-2 col-md-4"></div>
-                            <div class="col-8 col-md-4">
-                                <h6 @click="partyInfo">Enter Party Info</h6>
-                            </div>
-                            <div class="col-2 col-md-4"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="reservationScreen2">
-                <div class="row">
-                    <div class="col">
-                        <input id="firstname" placeholder="First Name" type="text" v-model="firstname">
-                    </div>
-                    <div class="col">
-                        <input id="lastname" placeholder="Last Name" type="text" v-model="lastname">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <input id="email" placeholder="Email" type="text" v-model="email">
-                    </div>
-                    <div class="col">
-                        <input id="phone" placeholder="Phone Number" type="text" v-model="phone">
-                    </div>
-                </div>
-
-                <div class="row">
-                  <div class="col">
-                    <p id="highchair" @click="selectAcc('highchair', 'Highchair')">High Chair Required</p>
-                  </div>
-                  <div class="col">
-                    <p id="ada" @click="selectAcc('ada', 'ADA Access')">ADA Access Required</p>
-                  </div>
-                  <div class="col">
-                    <input id="other" @click="selectAcc('other', '')" placeholder="Other" type="text" v-model="other">
-                  </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-4"></div>
-                    <div id="inputButton" class="col-4">
-                        <input type="submit" value="Request" @click="confirm()">  
-                    </div>
-                    <div class="col-4"></div>
+                <div class="col-12 col-md-12 align-self-center">
+                    <br>
+                    <br>
+                    <h1 class="reservationsTagMain">Please call <a href="tel:-609-961-3899">(609) 961-3899</a> for reservations.</h1>
+                    <br>
+                    <br>
                 </div>
             </div>
         </div>
     </div>
     
-    -->
+    
     
     <a id="storyJump"><hr></a>
     

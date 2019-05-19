@@ -121,6 +121,7 @@ hr{
 
 
 /* STLYLING FOR PICTURES OF FOOD AND MENUS */
+/*
 #foodMenuIcons, #menuIcons{
     margin-top: 3%;
 }
@@ -134,13 +135,15 @@ hr{
     width: 50%;
     text-align: center;
 }
+*/
 #menuIcons{
-    width: 50%;
+    margin-left: 5%;
+    width: 90%;
     text-align: center;
 }
 #menuIcons img{
     margin-top: 5%;
-    width: 80%;
+    width: 70%;
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5), 0 10px 30px 0 rgba(0, 0, 0, 0.4);
 }
 #menuIcons img:hover{
@@ -152,7 +155,7 @@ hr{
     opacity: .85;
     height: 100vh;
 }
-#full-breakfast-menu img, #full-dinner-menu img{
+#full-breakfast-menu img, #full-dessert-menu img, #full-dinner-menu img{
     position: absolute;
     z-index: 2;
     margin-top: 5%;
@@ -176,16 +179,13 @@ hr{
     cursor: pointer;
 }
 /* HIDING ALL POPUPS */
-#full-breakfast-menu{
-    display: none;
-}
 #exit{
     display:none;
 }
 #menu-background{
     display: none;
 }
-#full-dinner-menu{
+#full-breakfast-menu, #full-dinner-menu, #full-dessert-menu{
     display: none;
 }
 #reviews img{
@@ -291,7 +291,6 @@ hr{
 #reservationSelectionContainer .col, #reservationSelectionContainer .col-6, #reservationSelectionContainer .col-12, #reservationSelectionContainer .col-3,
 #reservationSelectionContainer .col-4, #reservationSelectionContainer .col-4, #reservationSelectionContainer .col-5, #reservationSelectionContainer .col-7, #reservationSelectionContainer .col-2{
     text-align: center;
-    /**border: 1px solid black;**/
     margin-top: 1%;
     margin-bottom: 1%;
 }
@@ -404,7 +403,9 @@ hr{
 #reservationSelectionContainer #timeSelection .row{
     margin: 1%;
 }
+
 /*STYLING FOR RESERVATION CONFIRMATION AND INPUT*/ 
+/*
 #confirmScreen{
     margin: 5%;
     margin-top: 0;
@@ -423,22 +424,24 @@ hr{
     text-align: center;
     display: none;
 }
+*/
 
 /*STYLING FOR RESERVATION CONFIRMATION AND INPUT*/ 
 
+#reservationContainerScreen{
+    display: block;
+}
+#reservationSelectionContainer h1{
+    text-decoration: none;
+    color: #7bc7dd;
+}
+/*
 #confirmScreen .row{
     margin: 2%;
     margin-top: 0;
 }
-#reservationContainerScreen{
-    display: block;
-}
 #reservationScreen1, #reservationScreen2{
     margin-bottom: 10%;
-}
-#reservationSelectionContainer h1{
-    text-decoration: underline;
-    color: #7bc7dd;
 }
 #reservationScreen2{
     display: none;
@@ -477,6 +480,7 @@ hr{
     margin-bottom: 15%;
     margin-top: 5%;
 }
+*/
 
 
 /* FAQ Styling */

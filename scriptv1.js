@@ -24,9 +24,15 @@ function showBreakfast(){
     $("#exit")[0].style.display = "inline";
     $("#menu-background")[0].style.display = "inline";
 }
+function showDessert(){
+    $("#full-dessert-menu")[0].style.display = "inline";
+    $("#exit")[0].style.display = "inline";
+    $("#menu-background")[0].style.display = "inline";
+}
 function exitMenu(){
     $("#full-breakfast-menu")[0].style.display = "none";
     $("#full-dinner-menu")[0].style.display = "none";
+    $("#full-dessert-menu")[0].style.display = "none";
     $("#exit")[0].style.display = "none";
     $("#menu-background")[0].style.display = "none";
 }
