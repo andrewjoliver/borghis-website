@@ -71,7 +71,7 @@ hr{
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 5%;
     z-index: 5;
     background-color: gray;
@@ -647,6 +647,13 @@ hr{
 
 /*STYLING FOR MOBILE*/
 @media (max-width: 600px){
+	.progress-container{
+		display: none;
+	}
+	#name{
+	    margin-top: 5vh;
+	    width: 50%;
+	}
     #foodMenuIcons{
         display: inline;
         margin: 2%;
@@ -686,7 +693,7 @@ hr{
         margin: 2%;
     }
     #reviews img{
-        margin-top: 5%;
+        margin-top: 30%;
     }
     #reviews .col-12{
         box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 5px 15px 0 rgba(0, 0, 0, 0.4);
@@ -722,6 +729,20 @@ hr{
         margin-top: 8%;
         font-size: 150%;
     }
+    #location .container{
+    	height: 50%;
+    }
+    #infoContainerclass{
+	    margin-left: 10%;
+	    width: 80%;
+	}
+	.col-12{
+		padding: 0;
+    	margin: 0;
+	}
+	#infoContainerclass p{
+	    font-size: 100%;
+	}
     #emailAcct{
         height: 8vh;
     }
