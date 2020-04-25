@@ -89,11 +89,11 @@ function showDropDownMenu(){
     if ($(window).width() < 601){
         if (dropDownButton % 2 == 0){
             $(".bg .container-fluid #navbar")[0].style.visibility = "visible";
-            $(".progress-container")[0].style.visibility = "hidden";
+            // $(".progress-container")[0].style.visibility = "hidden";
         }
         else{
             $(".bg .container-fluid #navbar")[0].style.visibility = "hidden";
-            $(".progress-container")[0].style.visibility = "visible";
+            // $(".progress-container")[0].style.visibility = "visible";
         }
         dropDownButton++
     }
