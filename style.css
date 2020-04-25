@@ -650,6 +650,10 @@ hr{
 	.progress-container{
 		display: none;
 	}
+	#reservationsHeader{
+		margin-left: 10%;
+		width: 80%;
+	}
 	#name{
 	    margin-top: 5vh;
 	    width: 50%;
