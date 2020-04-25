@@ -89,8 +89,10 @@
         
         <img id="name" src="photos/logos.png">
         <div id="address">
-            <p><b>Open for weekends until Memorial Day. Open daily May 31st through Labor Day</b></p>
-            <p>| Dinner: 5 PM - 10 PM | Breakfast: 8 AM - 12:00 PM |</p>
+            <p><b>Due to COVID-19, Borghi's is moving to Curbside Pickup and Delivery only for the time being. We hope all of you are safe and well! Borghi's will open Friday, May 1st. Dinner will be available every night, and breakfast will be available Friday-Sunday.</b></p>
+            <p>Dinner Hours: 4 PM - 9 PM | Breakfast Hours: 9 AM - 11:30 AM</p>
+            <br>
+            <p><b>Borghi's is excited to still offer daily specials, including our delicious Seafood Fra Diavolo. To place an order or hear our specials, please call us at <a href="tel:+16099613899">(609) 961-3899</a>. </b></p>
             <p id="addressListed">8128 Third Avenue Stone Harbor, NJ | (609) 961-3899</p>
         </div>
         
@@ -101,8 +103,12 @@
     </div>
     
     <div id="menus">
+
+<!--     	<div id="full-dinner-menu">
+            <img src="photos/curr-menu.pdf">
+        </div> -->
         
-        <div id="full-breakfast-menu">
+<!--         <div id="full-breakfast-menu">
             <img src="photos/full-breakfast-menu.jpg">
         </div>
         <div id="full-dinner-menu">
@@ -110,7 +116,7 @@
         </div>
         <div id="full-dessert-menu">
             <img src="photos/full-dessert-menu.jpg">
-        </div>
+        </div> -->
         
         <div id="exit">
             <img onclick="javascript:exitMenu()" src="photos/exit-logo.png">
@@ -148,15 +154,18 @@
             <div id="menuIcons">
                 <div class="container">
                     <div class="row">
-                        <div class="col align-self-center">
+                        <!-- <div class="col align-self-center">
                             <img onclick="javascript:showBreakfast()" src="photos/breakfast-menu-icon.png">
-                        </div>
+                        </div> -->
                         <div class="col align-self-center">
-                            <img onclick="javascript:showDinner()" src="photos/dinner-menu-icon.png">
+                            <!-- <img onclick="javascript:showDinner()" src="photos/menu-updated-icon.png"> -->
+                            <a href="photos/curr-menu.pdf" target="_blank">
+                            	<img src="photos/menu-updated-icon.png"/>
+                            </a>
                         </div>
-                        <div class="col align-self-center">
+                        <!-- <div class="col align-self-center">
                             <img onclick="javascript:showDessert()" src="photos/dessert-menu-icon.png">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <br>
@@ -360,7 +369,7 @@
                             <img src="photos/phone.png">
                         </div>
                         <div class="col-10">
-                            <h2>609-961-3899</h2>
+                            <h2><a href="tel:+16099613899">(609) 961-3899</a></h2>
                         </div>
                     </div>
                     <div class="row">

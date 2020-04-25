@@ -15,9 +15,9 @@ $("a").on('click', function(event) {
     }
 });
 function showDinner(){
-    $("#full-dinner-menu")[0].style.display = "inline";
-    $("#exit")[0].style.display = "inline";
-    $("#menu-background")[0].style.display = "inline";
+    // $("#full-dinner-menu")[0].style.display = "inline";
+    // $("#exit")[0].style.display = "inline";
+    // $("#menu-background")[0].style.display = "inline";
 }
 function showBreakfast(){
     $("#full-breakfast-menu")[0].style.display = "inline";

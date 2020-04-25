@@ -29,7 +29,7 @@ hr{
     text-align: center;
 }
 #name{
-    margin-top: 25vh;
+    margin-top: 10vh;
     width: 50%;
 }
 #header .row{
@@ -136,14 +136,21 @@ hr{
     text-align: center;
 }
 */
+#address{
+	margin-left: 15%;
+	width: 70%
+}
+#address p{
+	font-size: 13pt;
+}
 #menuIcons{
     margin-left: 5%;
     width: 90%;
     text-align: center;
 }
 #menuIcons img{
-    margin-top: 5%;
-    width: 70%;
+    margin-top: 0%;
+    width: 20%;
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5), 0 10px 30px 0 rgba(0, 0, 0, 0.4);
 }
 #menuIcons img:hover{
