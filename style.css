@@ -64,6 +64,17 @@ hr{
 #header .row{
     height: 30px;
 }
+#header #address {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+#header #address p{
+    font-size: 170%;
+}
+#header #specials p{
+    font-size: 125%;
+}
 
 /*HAMBURGER STYLING*/
 #hamburgerContainer{
@@ -764,3 +775,4 @@ hr{
         text-align: center;
     }
 }
+
